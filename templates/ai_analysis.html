@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>OrthoSense AI - AI Analysis</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 240px;
+            height: 100vh;
+            background: #111827;
+            padding: 25px 15px;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .logo span {
+            color: #38bdf8;
+        }
+
+        .nav a {
+            display: block;
+            text-decoration: none;
+            color: #cbd5e1;
+            padding: 14px 18px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+        }
+
+        .nav a:hover {
+            background: #1e293b;
+            color: white;
+        }
+
+        .nav a.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        /* MAIN */
+
+        .main {
+            margin-left: 240px;
+            padding: 35px;
+        }
+
+        .header {
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #64748b;
+        }
+
+        /* GRID */
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        /* CARD */
+
+        .card {
+            background: white;
+            border-radius: 14px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+
+        .card h2 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        /* FORM */
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .form-group input:focus {
+            border-color: #2563eb;
+        }
+
+        .analyze-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .analyze-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* RESULT */
+
+        .result-box {
+            display: none;
+        }
+
+        .result-main {
+            text-align: center;
+            padding: 25px;
+            border-radius: 12px;
+            background: #f8fafc;
+            margin-bottom: 20px;
+        }
+
+        .result-main h3 {
+            font-size: 26px;
+            margin-bottom: 8px;
+        }
+
+        .risk-lower {
+            color: #16a34a;
+        }
+
+        .risk-higher {
+            color: #dc2626;
+        }
+
+        .score {
+            font-size: 40px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .score-label {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        /* METRICS */
+
+        .metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .metric {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .metric small {
+            color: #64748b;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .metric strong {
+            font-size: 19px;
+        }
+
+        /* PATIENT INFO */
+
+        .patient-info {
+            background: #eff6ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .patient-info p {
+            margin-bottom: 5px;
+        }
+
+        /* NOTICE */
+
+        .notice {
+            margin-top: 25px;
+            background: #fff7ed;
+            border-left: 4px solid #f97316;
+            padding: 15px;
+            border-radius: 8px;
+            color: #7c2d12;
+            font-size: 13px;
+        }
+
+        /* ERROR */
+
+        .error {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            background: #fee2e2;
+            color: #991b1b;
+            border-radius: 8px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .sidebar {
+                width: 190px;
+            }
+
+            .main {
+                margin-left: 190px;
+                padding: 20px;
+            }
+
+            .metrics {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <div class="logo">
+        Ortho<span>Sense</span> AI
+    </div>
+
+    <div class="nav">
+
+        <a href="/">
+            Dashboard
+        </a>
+
+        <a href="/history">
+            Assessment History
+        </a>
+
+        <a href="/sensor-monitor">
+            Sensor Monitor
+        </a>
+
+        <a href="/ai-analysis"
+           class="active">
+            AI Analysis
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- MAIN -->
+
+<div class="main">
+
+
+    <div class="header">
+
+        <h1>
+            AI Movement Analysis
+        </h1>
+
+        <p>
+            Analyze patient gait and movement using the OrthoSense AI model.
+        </p>
+
+    </div>
+
+
+
+    <div class="grid">
+
+
+        <!-- INPUT CARD -->
+
+        <div class="card">
+
+            <h2>
+                Patient Assessment
+            </h2>
+
+
+            <div class="form-group">
+
+                <label>
+                    Patient ID
+                </label>
+
+                <input
+                    type="text"
+                    id="patient_id"
+                    placeholder="Example: P001">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Age
+                </label>
+
+                <input
+                    type="number"
+                    id="age"
+                    placeholder="Enter age">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Step Count
+                </label>
+
+                <input
+                    type="number"
+                    id="step_count"
+                    placeholder="Example: 100">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Cadence
+                </label>
+
+                <input
+                    type="number"
+                    id="cadence"
+                    placeholder="Example: 75">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Balance
+                </label>
+
+                <input
+                    type="number"
+                    id="balance"
+                    placeholder="Example: 85">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Symmetry
+                </label>
+
+                <input
+                    type="number"
+                    id="symmetry"
+                    placeholder="Example: 90">
+
+            </div>
+
+
+            <button
+                class="analyze-btn"
+                onclick="analyzeMovement()">
+
+                Analyze Movement
+
+            </button>
+
+
+            <div
+                class="error"
+                id="error">
+
+                Unable to perform analysis.
+
+            </div>
+
+        </div>
+
+
+
+        <!-- RESULT CARD -->
+
+        <div class="card">
+
+            <h2>
+                AI Assessment Result
+            </h2>
+
+
+            <div
+                class="result-box"
+                id="resultBox">
+
+
+                <div class="patient-info">
+
+                    <p>
+                        <strong>Patient ID:</strong>
+                        <span id="resultPatient">
+                            -
+                        </span>
+                    </p>
+
+                    <p>
+                        <strong>Age:</strong>
+                        <span id="resultAge">
+                            -
+                        </span>
+                    </p>
+
+                    <p>
+                        <strong>Assessment Time:</strong>
+                        <span id="assessmentTime">
+                            -
+                        </span>
+                    </p>
+
+                </div>
+
+
+
+                <div class="result-main">
+
+                    <h3 id="riskResult">
+                        -
+                    </h3>
+
+                    <div class="score"
+                         id="riskScore">
+
+                        0%
+
+                    </div>
+
+                    <div class="score-label">
+                        AI Risk Score
+                    </div>
+
+                </div>
+
+
+
+                <div class="metrics">
+
+                    <div class="metric">
+
+                        <small>
+                            Step Count
+                        </small>
+
+                        <strong id="resultSteps">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="metric">
+
+                        <small>
+                            Cadence
+                        </small>
+
+                        <strong id="resultCadence">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="metric">
+
+                        <small>
+                            Balance
+                        </small>
+
+                        <strong id="resultBalance">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="metric">
+
+                        <small>
+                            Symmetry
+                        </small>
+
+                        <strong id="resultSymmetry">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="metric">
+
+                        <small>
+                            Movement Quality
+                        </small>
+
+                        <strong id="resultQuality">
+                            -
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="notice">
+
+                    This AI result is intended to support
+                    movement assessment and should not replace
+                    professional clinical evaluation.
+
+                </div>
+
+
+            </div>
+
+
+            <div id="emptyResult"
+                 style="text-align:center;
+                        padding:60px 20px;
+                        color:#64748b;">
+
+                <h3>
+                    Ready for Analysis
+                </h3>
+
+                <p style="margin-top:10px;">
+                    Enter patient movement data and click
+                    <strong>Analyze Movement</strong>.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+async function analyzeMovement() {
+
+    const patientId =
+        document.getElementById("patient_id").value.trim();
+
+    const age =
+        document.getElementById("age").value;
+
+    const stepCount =
+        document.getElementById("step_count").value;
+
+    const cadence =
+        document.getElementById("cadence").value;
+
+    const balance =
+        document.getElementById("balance").value;
+
+    const symmetry =
+        document.getElementById("symmetry").value;
+
+
+    const errorBox =
+        document.getElementById("error");
+
+
+    errorBox.style.display = "none";
+
+
+    if (
+        patientId === "" ||
+        age === "" ||
+        stepCount === "" ||
+        cadence === "" ||
+        balance === "" ||
+        symmetry === ""
+    ) {
+
+        errorBox.innerText =
+            "Please enter all patient and movement details.";
+
+        errorBox.style.display = "block";
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch("/predict", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    patient_id: patientId,
+
+                    age: Number(age),
+
+                    step_count:
+                        Number(stepCount),
+
+                    cadence:
+                        Number(cadence),
+
+                    balance:
+                        Number(balance),
+
+                    symmetry:
+                        Number(symmetry)
+
+                })
+
+            });
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Server error"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        /* SHOW RESULT */
+
+        document.getElementById(
+            "emptyResult"
+        ).style.display = "none";
+
+
+        document.getElementById(
+            "resultBox"
+        ).style.display = "block";
+
+
+        /* PATIENT */
+
+        document.getElementById(
+            "resultPatient"
+        ).innerText = patientId;
+
+
+        document.getElementById(
+            "resultAge"
+        ).innerText = age;
+
+
+        document.getElementById(
+            "assessmentTime"
+        ).innerText =
+            new Date().toLocaleString();
+
+
+        /* RISK */
+
+        const riskElement =
+            document.getElementById(
+                "riskResult"
+            );
+
+
+        riskElement.innerText =
+            data.risk;
+
+
+        if (
+            data.risk === "Higher Risk"
+        ) {
+
+            riskElement.className =
+                "risk-higher";
+
+        } else {
+
+            riskElement.className =
+                "risk-lower";
+
+        }
+
+
+        /* SCORE */
+
+        document.getElementById(
+            "riskScore"
+        ).innerText =
+            data.risk_score + "%";
+
+
+        /* METRICS */
+
+        document.getElementById(
+            "resultSteps"
+        ).innerText =
+            data.step_count;
+
+
+        document.getElementById(
+            "resultCadence"
+        ).innerText =
+            data.cadence;
+
+
+        document.getElementById(
+            "resultBalance"
+        ).innerText =
+            data.balance;
+
+
+        document.getElementById(
+            "resultSymmetry"
+        ).innerText =
+            data.symmetry;
+
+
+        document.getElementById(
+            "resultQuality"
+        ).innerText =
+            data.movement_quality;
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        errorBox.innerText =
+            "Unable to connect to the AI server. Make sure Flask is running.";
+
+        errorBox.style.display = "block";
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+</html>

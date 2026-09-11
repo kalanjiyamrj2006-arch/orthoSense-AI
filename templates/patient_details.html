@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>OrthoSense AI - Assessment History</title>
+    <title>OrthoSense AI - Patient Details</title>
 
     <style>
 
@@ -23,8 +23,6 @@
             background: #f4f7fb;
             color: #1f2937;
         }
-
-        /* SIDEBAR */
 
         .sidebar {
             position: fixed;
@@ -55,7 +53,6 @@
             padding: 14px 18px;
             margin-bottom: 8px;
             border-radius: 8px;
-            transition: 0.2s;
         }
 
         .nav a:hover {
@@ -67,8 +64,6 @@
             background: #2563eb;
             color: white;
         }
-
-        /* MAIN */
 
         .main {
             margin-left: 240px;
@@ -88,56 +83,56 @@
             color: #64748b;
         }
 
-        /* CARD */
+        .patient-card {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
 
-        .card {
+        .patient-id {
+            color: #2563eb;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .summary-box {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 10px;
+        }
+
+        .summary-box small {
+            color: #64748b;
+        }
+
+        .summary-box h2 {
+            margin-top: 8px;
+        }
+
+        .table-card {
             background: white;
             border-radius: 14px;
             padding: 25px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.06);
         }
 
-        /* PATIENT SEARCH */
-
-        .search-box {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-        }
-
-        .search-box input {
-            flex: 1;
-            padding: 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            outline: none;
-        }
-
-        .search-box button {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            background: #2563eb;
-            color: white;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .search-box button:hover {
-            background: #1d4ed8;
-        }
-
-        /* TABLE */
-
         .table-container {
-            width: 100%;
             overflow-x: auto;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 1100px;
+            min-width: 1000px;
         }
 
         th {
@@ -158,14 +153,11 @@
             background: #f8fafc;
         }
 
-        /* RISK */
-
         .risk {
             padding: 6px 10px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: bold;
-            display: inline-block;
         }
 
         .lower {
@@ -178,33 +170,6 @@
             color: #991b1b;
         }
 
-        /* PATIENT BUTTON */
-
-        .patient-btn {
-            display: inline-block;
-            text-decoration: none;
-            background: #eff6ff;
-            color: #2563eb;
-            padding: 7px 12px;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 12px;
-        }
-
-        .patient-btn:hover {
-            background: #dbeafe;
-        }
-
-        /* EMPTY */
-
-        .empty {
-            text-align: center;
-            padding: 50px;
-            color: #64748b;
-        }
-
-        /* BACK BUTTON */
-
         .back-btn {
             display: inline-block;
             margin-top: 20px;
@@ -215,11 +180,11 @@
             border-radius: 8px;
         }
 
-        .back-btn:hover {
-            background: #1d4ed8;
+        .empty {
+            text-align: center;
+            padding: 50px;
+            color: #64748b;
         }
-
-        /* RESPONSIVE */
 
         @media (max-width: 800px) {
 
@@ -232,8 +197,8 @@
                 padding: 20px;
             }
 
-            .header h1 {
-                font-size: 24px;
+            .summary {
+                grid-template-columns: 1fr;
             }
 
         }
@@ -278,7 +243,6 @@
 </div>
 
 
-
 <!-- MAIN -->
 
 <div class="main">
@@ -287,38 +251,97 @@
     <div class="header">
 
         <h1>
-            Assessment History
+            Patient Assessment Details
         </h1>
 
         <p>
-            View and analyze previous patient movement assessments.
+            Complete movement assessment history for this patient.
         </p>
 
     </div>
 
 
+    <!-- PATIENT SUMMARY -->
 
-    <div class="card">
+    <div class="patient-card">
 
-
-        <!-- PATIENT SEARCH -->
-
-        <div class="search-box">
-
-            <input
-                type="text"
-                id="patientInput"
-                placeholder="Enter Patient ID e.g. P001">
-
-            <button onclick="viewPatient()">
-                View Patient
-            </button>
-
+        <div class="patient-id">
+            Patient: {{ patient_id }}
         </div>
 
 
+        {% if records %}
 
-        <!-- TABLE -->
+        <div class="summary">
+
+            <div class="summary-box">
+
+                <small>
+                    Total Assessments
+                </small>
+
+                <h2>
+                    {{ records|length }}
+                </h2>
+
+            </div>
+
+
+            <div class="summary-box">
+
+                <small>
+                    Latest Risk
+                </small>
+
+                <h2>
+
+                    {% if records[0]['risk'] == 'Higher Risk' %}
+
+                        <span style="color:#dc2626;">
+                            Higher Risk
+                        </span>
+
+                    {% else %}
+
+                        <span style="color:#16a34a;">
+                            Lower Risk
+                        </span>
+
+                    {% endif %}
+
+                </h2>
+
+            </div>
+
+
+            <div class="summary-box">
+
+                <small>
+                    Latest Movement Quality
+                </small>
+
+                <h2>
+                    {{ records[0]['movement_quality'] }}
+                </h2>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+
+    <!-- ASSESSMENTS -->
+
+    <div class="table-card">
+
+        <h2 style="margin-bottom:20px;">
+            Assessment Records
+        </h2>
+
 
         {% if records %}
 
@@ -331,8 +354,6 @@
                     <tr>
 
                         <th>ID</th>
-
-                        <th>Patient ID</th>
 
                         <th>Age</th>
 
@@ -352,8 +373,6 @@
 
                         <th>Date</th>
 
-                        <th>Details</th>
-
                     </tr>
 
                 </thead>
@@ -367,12 +386,6 @@
 
                         <td>
                             {{ record['id'] }}
-                        </td>
-
-                        <td>
-                            <strong>
-                                {{ record['patient_id'] }}
-                            </strong>
                         </td>
 
                         <td>
@@ -425,18 +438,6 @@
                             {{ record['created_at'] }}
                         </td>
 
-                        <td>
-
-                            <a
-                                class="patient-btn"
-                                href="/patient/{{ record['patient_id'] }}">
-
-                                View
-
-                            </a>
-
-                        </td>
-
                     </tr>
 
                 {% endfor %}
@@ -447,16 +448,18 @@
 
         </div>
 
+
         {% else %}
 
         <div class="empty">
 
             <h3>
-                No assessment records found
+                No assessments found
             </h3>
 
             <p>
-                Complete an AI assessment to create patient records.
+                No assessment records exist for patient
+                {{ patient_id }}.
             </p>
 
         </div>
@@ -464,44 +467,18 @@
         {% endif %}
 
 
-
         <a
-            href="/"
+            href="/history"
             class="back-btn">
 
-            ← Back to Dashboard
+            ← Back to History
 
         </a>
 
-
     </div>
 
+
 </div>
-
-
-
-<script>
-
-function viewPatient() {
-
-    const patientId =
-        document.getElementById("patientInput").value.trim();
-
-    if (patientId === "") {
-
-        alert("Please enter a Patient ID.");
-
-        return;
-
-    }
-
-    window.location.href =
-        "/patient/" +
-        encodeURIComponent(patientId);
-
-}
-
-</script>
 
 
 </body>
