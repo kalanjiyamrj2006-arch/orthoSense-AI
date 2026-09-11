@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>OrthoSense AI | Smart Orthopedic Platform</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f5f8fc;
+            color: #172b4d;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 240px;
+            height: 100vh;
+            background: #102a43;
+            color: white;
+            padding: 25px 18px;
+            z-index: 10;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 5px 10px 30px;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: #36cfc9;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .logo h2 {
+            font-size: 19px;
+            color: white;
+        }
+
+        .logo span {
+            font-size: 11px;
+            color: #9fb3c8;
+            display: block;
+            margin-top: 3px;
+        }
+
+        .nav-title {
+            color: #829ab1;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 20px 12px 10px;
+        }
+
+        .nav-item {
+            display: block;
+            text-decoration: none;
+            color: #bcccdc;
+            padding: 13px 14px;
+            border-radius: 9px;
+            margin-bottom: 6px;
+            transition: 0.2s;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: #1f4e79;
+            color: white;
+        }
+
+        .sidebar-bottom {
+            position: absolute;
+            bottom: 25px;
+            left: 20px;
+            right: 20px;
+            background: #173b5e;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 12px;
+            color: #d9e2ec;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 240px;
+            min-height: 100vh;
+        }
+
+        /* ================= TOP BAR ================= */
+
+        .topbar {
+            height: 75px;
+            background: white;
+            border-bottom: 1px solid #e4e9ef;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 35px;
+        }
+
+        .page-title h1 {
+            font-size: 22px;
+            color: #102a43;
+        }
+
+        .page-title p {
+            font-size: 12px;
+            color: #829ab1;
+            margin-top: 4px;
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 9px 15px;
+            background: #e8f8f2;
+            color: #16794c;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .dot {
+            width: 9px;
+            height: 9px;
+            background: #27ae60;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px #d5f5e5;
+        }
+
+        /* ================= CONTENT ================= */
+
+        .content {
+            padding: 30px 35px;
+            max-width: 1500px;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            background: linear-gradient(110deg, #102a43, #1f5f8b);
+            color: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero:after {
+            content: "🦴";
+            position: absolute;
+            right: 45px;
+            top: 18px;
+            font-size: 100px;
+            opacity: 0.08;
+        }
+
+        .hero h2 {
+            font-size: 26px;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            color: #d9eaf7;
+            max-width: 650px;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 7px 12px;
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 20px;
+            font-size: 11px;
+        }
+
+        /* ================= GRID ================= */
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            margin-bottom: 22px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e8edf3;
+            border-radius: 14px;
+            padding: 23px;
+            box-shadow: 0 4px 18px rgba(16,42,67,0.05);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title-icon {
+            width: 36px;
+            height: 36px;
+            background: #edf6fb;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .card h3 {
+            color: #102a43;
+            font-size: 16px;
+        }
+
+        .card-subtitle {
+            color: #829ab1;
+            font-size: 11px;
+            margin-top: 3px;
+        }
+
+        /* ================= FORM ================= */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #486581;
+            margin-bottom: 7px;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1px solid #d9e2ec;
+            border-radius: 8px;
+            outline: none;
+            font-size: 13px;
+            color: #243b53;
+            background: #fbfcfe;
+        }
+
+        input:focus {
+            border-color: #2684ff;
+            box-shadow: 0 0 0 3px rgba(38,132,255,0.1);
+        }
+
+        /* ================= BUTTON ================= */
+
+        .analyze-btn {
+            width: 100%;
+            margin-top: 18px;
+            padding: 13px;
+            border: none;
+            border-radius: 9px;
+            background: #1f5f8b;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .analyze-btn:hover {
+            background: #174b70;
+            transform: translateY(-1px);
+        }
+
+        /* ================= LIVE SENSOR ================= */
+
+        .live-badge {
+            font-size: 10px;
+            background: #e8f8f2;
+            color: #16794c;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .sensor-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .sensor-box {
+            background: #f7faff;
+            border: 1px solid #e6edf5;
+            border-radius: 10px;
+            padding: 17px 10px;
+            text-align: center;
+        }
+
+        .sensor-box .icon {
+            font-size: 19px;
+            margin-bottom: 7px;
+        }
+
+        .sensor-box small {
+            display: block;
+            color: #829ab1;
+            font-size: 10px;
+        }
+
+        .sensor-value {
+            color: #102a43;
+            font-size: 21px;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        .sensor-status {
+            margin-top: 15px;
+            padding: 9px;
+            text-align: center;
+            border-radius: 7px;
+            background: #f0f3f7;
+            color: #829ab1;
+            font-size: 11px;
+        }
+
+        /* ================= RESULT ================= */
+
+        #result {
+            display: none;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .result-box {
+            padding: 20px;
+            border-radius: 11px;
+            background: #f7faff;
+            border: 1px solid #e5edf5;
+        }
+
+        .result-box span {
+            color: #829ab1;
+            font-size: 11px;
+        }
+
+        .result-box strong {
+            display: block;
+            margin-top: 8px;
+            color: #102a43;
+            font-size: 21px;
+        }
+
+        /* ================= SCORE BARS ================= */
+
+        .score-section {
+            margin-top: 25px;
+        }
+
+        .score-row {
+            margin-bottom: 18px;
+        }
+
+        .score-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 7px;
+            color: #486581;
+        }
+
+        .progress {
+            height: 9px;
+            background: #e9eef4;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: #1f5f8b;
+            border-radius: 20px;
+            transition: width 1s ease;
+        }
+
+        /* ================= CHART ================= */
+
+        .chart-card {
+            margin-top: 22px;
+        }
+
+        .chart-wrapper {
+            height: 280px;
+        }
+
+        /* ================= WARNING ================= */
+
+        .medical-note {
+            margin-top: 20px;
+            padding: 13px 15px;
+            background: #fff8e8;
+            border: 1px solid #f4dfad;
+            border-radius: 9px;
+            color: #725b20;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+            color: #829ab1;
+            font-size: 11px;
+            padding: 25px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media(max-width: 900px) {
+
+            .sidebar {
+                width: 70px;
+                padding: 20px 10px;
+            }
+
+            .logo h2,
+            .logo span,
+            .nav-title,
+            .nav-item span,
+            .sidebar-bottom {
+                display: none;
+            }
+
+            .logo {
+                justify-content: center;
+                padding: 5px 0 25px;
+            }
+
+            .nav-item {
+                text-align: center;
+                font-size: 20px;
+            }
+
+            .main {
+                margin-left: 70px;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+
+            .result-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+        @media(max-width: 600px) {
+
+            .content {
+                padding: 18px;
+            }
+
+            .topbar {
+                padding: 0 18px;
+            }
+
+            .system-status {
+                display: none;
+            }
+
+            .form-grid,
+            .sensor-grid,
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h2 {
+                font-size: 21px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            🦴
+        </div>
+
+        <div>
+            <h2>OrthoSense</h2>
+            <span>AI Healthcare Platform</span>
+        </div>
+
+    </div>
+
+
+    <div class="nav-title">
+        Workspace
+    </div>
+
+
+    <a href="/" class="nav-item active">
+        🏠 <span>Dashboard</span>
+    </a>
+
+
+    <a href="/history" class="nav-item">
+        📋 <span>Assessment History</span>
+    </a>
+
+
+    <div class="nav-title">
+        System
+    </div>
+
+
+    <div class="nav-item">
+        📡 <span>Sensor Monitor</span>
+    </div>
+
+
+    <div class="nav-item">
+        🤖 <span>AI Analysis</span>
+    </div>
+
+
+    <div class="sidebar-bottom">
+
+        <b>OrthoSense AI v1.0</b>
+
+        <br><br>
+
+        AI-assisted movement screening platform
+
+    </div>
+
+</aside>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+
+    <!-- TOP BAR -->
+
+    <div class="topbar">
+
+        <div class="page-title">
+
+            <h1>Movement Intelligence</h1>
+
+            <p>Orthopedic movement assessment dashboard</p>
+
+        </div>
+
+
+        <div class="system-status">
+
+            <div class="dot"></div>
+
+            System Online
+
+        </div>
+
+    </div>
+
+
+
+    <div class="content">
+
+
+        <!-- ================= HERO ================= -->
+
+        <section class="hero">
+
+            <h2>AI-Powered Movement Assessment</h2>
+
+            <p>
+                OrthoSense AI combines movement metrics and sensor-based
+                analysis to provide an early-stage orthopedic movement
+                screening estimate.
+            </p>
+
+            <div class="hero-tag">
+                ● AI-assisted • Sensor-ready • Offline-first architecture
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= PATIENT + GAIT ================= -->
+
+        <div class="two-column">
+
+
+            <!-- PATIENT -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <div class="card-title">
+
+                        <div class="card-title-icon">
+                            👤
+                        </div>
+
+                        <div>
+
+                            <h3>Patient Profile</h3>
+
+                            <div class="card-subtitle">
+                                Basic assessment information
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="field">
+
+                        <label>Patient ID</label>
+
+                        <input
+                            type="text"
+                            id="patient_id"
+                            placeholder="Example: P001">
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>Age</label>
+
+                        <input
+                            type="number"
+                            id="age"
+                            placeholder="Enter age">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- GAIT -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <div class="card-title">
+
+                        <div class="card-title-icon">
+                            🚶
+                        </div>
+
+                        <div>
+
+                            <h3>Gait Parameters</h3>
+
+                            <div class="card-subtitle">
+                                Movement assessment inputs
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="field">
+
+                        <label>Step Count</label>
+
+                        <input
+                            type="number"
+                            id="step_count"
+                            value="100"
+                            min="0">
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>Cadence (steps/min)</label>
+
+                        <input
+                            type="number"
+                            id="cadence"
+                            value="75"
+                            min="0">
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>Balance Score (%)</label>
+
+                        <input
+                            type="number"
+                            id="balance"
+                            value="85"
+                            min="0"
+                            max="100">
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>Left-Right Symmetry (%)</label>
+
+                        <input
+                            type="number"
+                            id="symmetry"
+                            value="90"
+                            min="0"
+                            max="100">
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="analyze-btn"
+                    onclick="analyze()">
+
+                    🤖 Analyze Movement
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= LIVE SENSOR ================= -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <div class="card-title">
+
+                    <div class="card-title-icon">
+                        📡
+                    </div>
+
+                    <div>
+
+                        <h3>Live Sensor Monitor</h3>
+
+                        <div class="card-subtitle">
+                            Real-time movement sensor stream
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="live-badge">
+                    ● LIVE
+                </div>
+
+            </div>
+
+
+            <div class="sensor-grid">
+
+
+                <div class="sensor-box">
+
+                    <div class="icon">
+                        👣
+                    </div>
+
+                    <small>STEP COUNT</small>
+
+                    <div
+                        class="sensor-value"
+                        id="live_steps">
+
+                        --
+
+                    </div>
+
+                </div>
+
+
+                <div class="sensor-box">
+
+                    <div class="icon">
+                        ⚡
+                    </div>
+
+                    <small>CADENCE</small>
+
+                    <div
+                        class="sensor-value"
+                        id="live_cadence">
+
+                        --
+
+                    </div>
+
+                </div>
+
+
+                <div class="sensor-box">
+
+                    <div class="icon">
+                        ⚖️
+                    </div>
+
+                    <small>BALANCE</small>
+
+                    <div
+                        class="sensor-value"
+                        id="live_balance">
+
+                        --%
+
+                    </div>
+
+                </div>
+
+
+                <div class="sensor-box">
+
+                    <div class="icon">
+                        ↔️
+                    </div>
+
+                    <small>SYMMETRY</small>
+
+                    <div
+                        class="sensor-value"
+                        id="live_symmetry">
+
+                        --%
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="sensor-status"
+                id="sensor_status">
+
+                🔴 Waiting for sensor data...
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= AI RESULT ================= -->
+
+        <div
+            class="card"
+            id="result"
+            style="margin-top:22px;">
+
+            <div class="card-header">
+
+                <div class="card-title">
+
+                    <div class="card-title-icon">
+                        🧠
+                    </div>
+
+                    <div>
+
+                        <h3>AI Movement Assessment</h3>
+
+                        <div class="card-subtitle">
+                            AI-generated screening estimate
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="result-grid">
+
+
+                <div class="result-box">
+
+                    <span>RISK LEVEL</span>
+
+                    <strong id="risk">
+                        --
+                    </strong>
+
+                </div>
+
+
+                <div class="result-box">
+
+                    <span>RISK SCORE</span>
+
+                    <strong id="risk_score">
+                        --%
+                    </strong>
+
+                </div>
+
+
+                <div class="result-box">
+
+                    <span>MOVEMENT QUALITY</span>
+
+                    <strong id="quality">
+                        --%
+                    </strong>
+
+                </div>
+
+
+                <div class="result-box">
+
+                    <span>CADENCE</span>
+
+                    <strong id="cadence_result">
+                        --
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SCORES -->
+
+            <div class="score-section">
+
+
+                <div class="score-row">
+
+                    <div class="score-label">
+
+                        <span>⚖️ Balance</span>
+
+                        <span id="balance_text">0%</span>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar"
+                            id="balance_bar">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="score-row">
+
+                    <div class="score-label">
+
+                        <span>↔️ Left-Right Symmetry</span>
+
+                        <span id="symmetry_text">0%</span>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar"
+                            id="symmetry_bar">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="score-row">
+
+                    <div class="score-label">
+
+                        <span>🦵 Movement Quality</span>
+
+                        <span id="quality_text">0%</span>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar"
+                            id="quality_bar">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CHART -->
+
+            <div class="card chart-card">
+
+                <div class="card-header">
+
+                    <div class="card-title">
+
+                        <div class="card-title-icon">
+                            📊
+                        </div>
+
+                        <div>
+
+                            <h3>Movement Performance</h3>
+
+                            <div class="card-subtitle">
+                                Comparative gait metrics
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="chart-wrapper">
+
+                    <canvas id="gaitChart"></canvas>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- MEDICAL NOTE -->
+
+            <div class="medical-note">
+
+                ⚠️ <b>Clinical Notice:</b>
+
+                OrthoSense AI provides an AI-assisted screening estimate
+                for movement assessment. It is not a medical diagnosis
+                and should not replace evaluation by a qualified healthcare
+                professional.
+
+            </div>
+
+        </div>
+
+
+
+        <footer>
+
+            OrthoSense AI • AIoT-based Orthopedic Movement Assessment
+            <br>
+            Prototype for academic and research purposes
+
+        </footer>
+
+
+    </div>
+
+</main>
+
+
+
+<script>
+
+let gaitChart = null;
+
+
+// ================= MANUAL AI ANALYSIS =================
+
+function analyze() {
+
+    const patientID =
+        document.getElementById("patient_id").value || "P001";
+
+    const age =
+        document.getElementById("age").value || 0;
+
+
+    const data = {
+
+        patient_id: patientID,
+
+        age: age,
+
+        step_count:
+            document.getElementById("step_count").value,
+
+        cadence:
+            document.getElementById("cadence").value,
+
+        balance:
+            document.getElementById("balance").value,
+
+        symmetry:
+            document.getElementById("symmetry").value
+
+    };
+
+
+    fetch("/predict", {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify(data)
+
+    })
+
+    .then(response => {
+
+        if (!response.ok) {
+
+            throw new Error("Server error");
+
+        }
+
+        return response.json();
+
+    })
+
+    .then(result => {
+
+        showResult(result);
+
+    })
+
+    .catch(error => {
+
+        console.error(error);
+
+        alert(
+            "Unable to connect to OrthoSense AI server."
+        );
+
+    });
+
+}
+
+
+
+// ================= SHOW RESULT =================
+
+function showResult(result) {
+
+    document.getElementById("result")
+        .style.display = "block";
+
+
+    document.getElementById("risk")
+        .innerText = result.risk;
+
+
+    document.getElementById("risk_score")
+        .innerText =
+        result.risk_score + "%";
+
+
+    document.getElementById("quality")
+        .innerText =
+        result.movement_quality + "%";
+
+
+    document.getElementById("cadence_result")
+        .innerText =
+        result.cadence;
+
+
+    document.getElementById("balance_bar")
+        .style.width =
+        result.balance + "%";
+
+
+    document.getElementById("symmetry_bar")
+        .style.width =
+        result.symmetry + "%";
+
+
+    document.getElementById("quality_bar")
+        .style.width =
+        result.movement_quality + "%";
+
+
+    document.getElementById("balance_text")
+        .innerText =
+        result.balance + "%";
+
+
+    document.getElementById("symmetry_text")
+        .innerText =
+        result.symmetry + "%";
+
+
+    document.getElementById("quality_text")
+        .innerText =
+        result.movement_quality + "%";
+
+
+    createChart(
+
+        result.balance,
+
+        result.symmetry,
+
+        result.movement_quality
+
+    );
+
+}
+
+
+
+// ================= LIVE SENSOR =================
+
+function getSensorData() {
+
+    fetch("/latest-sensor")
+
+    .then(response => {
+
+        if (!response.ok) {
+
+            throw new Error("No sensor data");
+
+        }
+
+        return response.json();
+
+    })
+
+    .then(data => {
+
+        document.getElementById("live_steps")
+            .innerText =
+            data.step_count;
+
+
+        document.getElementById("live_cadence")
+            .innerText =
+            data.cadence;
+
+
+        document.getElementById("live_balance")
+            .innerText =
+            data.balance + "%";
+
+
+        document.getElementById("live_symmetry")
+            .innerText =
+            data.symmetry + "%";
+
+
+        document.getElementById("sensor_status")
+            .innerText =
+            "🟢 Live sensor data received";
+
+
+        document.getElementById("sensor_status")
+            .style.background =
+            "#e8f8f2";
+
+
+        document.getElementById("sensor_status")
+            .style.color =
+            "#16794c";
+
+    })
+
+    .catch(error => {
+
+        document.getElementById("sensor_status")
+            .innerText =
+            "🔴 Waiting for sensor data...";
+
+
+        document.getElementById("sensor_status")
+            .style.background =
+            "#fff1f0";
+
+
+        document.getElementById("sensor_status")
+            .style.color =
+            "#cf1322";
+
+    });
+
+}
+
+
+// Update every 2 seconds
+
+setInterval(
+    getSensorData,
+    2000
+);
+
+
+// Run once immediately
+
+getSensorData();
+
+
+
+// ================= CHART =================
+
+function createChart(
+    balance,
+    symmetry,
+    quality
+) {
+
+    const ctx =
+        document.getElementById("gaitChart")
+        .getContext("2d");
+
+
+    if (gaitChart !== null) {
+
+        gaitChart.destroy();
+
+    }
+
+
+    gaitChart = new Chart(ctx, {
+
+        type: "bar",
+
+        data: {
+
+            labels: [
+                "Balance",
+                "Symmetry",
+                "Movement Quality"
+            ],
+
+            datasets: [{
+
+                label: "Performance (%)",
+
+                data: [
+                    balance,
+                    symmetry,
+                    quality
+                ],
+
+                borderWidth: 1,
+
+                borderRadius: 7
+
+            }]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+            plugins: {
+
+                legend: {
+
+                    display: false
+
+                }
+
+            },
+
+            scales: {
+
+                y: {
+
+                    beginAtZero: true,
+
+                    max: 100,
+
+                    ticks: {
+
+                        callback: function(value) {
+
+                            return value + "%";
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    });
+
+}
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Assessment History</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            margin: 0;
+        }
+
+        header {
+            background: #1f4e79;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px #ddd;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: #eef5ff;
+        }
+
+        a {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #1f4e79;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<header>
+
+    <h1>🦴 OrthoSense AI</h1>
+
+    <p>Assessment History</p>
+
+</header>
+
+
+<div class="container">
+
+    <a href="/">← Back to Dashboard</a>
+
+    <div class="card">
+
+        <table>
+
+            <tr>
+                <th>Patient ID</th>
+                <th>Age</th>
+                <th>Steps</th>
+                <th>Cadence</th>
+                <th>Balance</th>
+                <th>Symmetry</th>
+                <th>Risk</th>
+                <th>Risk Score</th>
+                <th>Date</th>
+            </tr>
+
+            {% for record in records %}
+
+            <tr>
+
+                <td>{{ record.patient_id }}</td>
+
+                <td>{{ record.age }}</td>
+
+                <td>{{ record.step_count }}</td>
+
+                <td>{{ record.cadence }}</td>
+
+                <td>{{ record.balance }}%</td>
+
+                <td>{{ record.symmetry }}%</td>
+
+                <td>{{ record.risk }}</td>
+
+                <td>{{ record.risk_score }}%</td>
+
+                <td>{{ record.created_at }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
