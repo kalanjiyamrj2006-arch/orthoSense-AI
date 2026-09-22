@@ -2,16 +2,12 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>OrthoSense AI - AI Analysis</title>
 
     <style>
-
         * {
             box-sizing: border-box;
             margin: 0;
@@ -20,8 +16,8 @@
         }
 
         body {
-            background: #f4f7fb;
-            color: #1f2937;
+            background: #f1f5f9;
+            color: #1e293b;
         }
 
         /* SIDEBAR */
@@ -30,31 +26,44 @@
             position: fixed;
             left: 0;
             top: 0;
-            width: 240px;
+            width: 245px;
             height: 100vh;
-            background: #111827;
+            background: #0f172a;
             padding: 25px 15px;
+            z-index: 100;
         }
 
         .logo {
-            color: white;
-            font-size: 22px;
-            font-weight: bold;
             text-align: center;
-            margin-bottom: 35px;
+            color: white;
+            font-size: 23px;
+            font-weight: bold;
+            margin-bottom: 8px;
         }
 
         .logo span {
             color: #38bdf8;
         }
 
+        .sidebar-subtitle {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 11px;
+            margin-bottom: 35px;
+            letter-spacing: 0.5px;
+        }
+
         .nav a {
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 12px;
             text-decoration: none;
             color: #cbd5e1;
-            padding: 14px 18px;
-            margin-bottom: 8px;
-            border-radius: 8px;
+            padding: 13px 15px;
+            margin-bottom: 7px;
+            border-radius: 9px;
+            font-size: 14px;
+            transition: 0.2s;
         }
 
         .nav a:hover {
@@ -67,89 +76,254 @@
             color: white;
         }
 
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .sidebar-footer {
+            position: absolute;
+            bottom: 25px;
+            left: 20px;
+            right: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #1e293b;
+            color: #64748b;
+            font-size: 11px;
+            text-align: center;
+        }
+
         /* MAIN */
 
         .main {
-            margin-left: 240px;
-            padding: 35px;
+            margin-left: 245px;
+            padding: 30px;
+            min-height: 100vh;
         }
 
-        .header {
+        /* HEADER */
+
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 25px;
         }
 
         .header h1 {
-            font-size: 30px;
-            margin-bottom: 8px;
+            font-size: 29px;
+            color: #0f172a;
+            margin-bottom: 7px;
         }
 
         .header p {
             color: #64748b;
+            font-size: 14px;
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 14px;
+            background: #ecfdf5;
+            border: 1px solid #bbf7d0;
+            border-radius: 30px;
+            color: #15803d;
+            font-size: 13px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+        }
+
+        /* HERO */
+
+        .hero {
+            background: linear-gradient(135deg, #172554, #2563eb);
+            color: white;
+            padding: 27px;
+            border-radius: 18px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.15);
+        }
+
+        .hero h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            color: #dbeafe;
+            font-size: 14px;
+            line-height: 1.6;
+            max-width: 800px;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 7px 12px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.12);
+            font-size: 11px;
+            color: #e0f2fe;
         }
 
         /* GRID */
 
-        .grid {
+        .analysis-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 24px;
+            align-items: start;
         }
 
         /* CARD */
 
         .card {
             background: white;
-            border-radius: 14px;
-            padding: 25px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 5px 20px rgba(15, 23, 42, 0.06);
+            border: 1px solid #e2e8f0;
         }
 
-        .card h2 {
-            margin-bottom: 20px;
-            font-size: 20px;
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .card-header h2 {
+            color: #0f172a;
+            font-size: 19px;
+        }
+
+        .card-header span {
+            color: #64748b;
+            font-size: 12px;
         }
 
         /* FORM */
 
         .form-group {
-            margin-bottom: 17px;
+            margin-bottom: 15px;
         }
 
         .form-group label {
             display: block;
             margin-bottom: 7px;
+            font-size: 13px;
             font-weight: bold;
-            font-size: 14px;
+            color: #334155;
         }
 
         .form-group input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
+            padding: 12px 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
             outline: none;
             font-size: 14px;
+            background: #fff;
+            transition: 0.2s;
         }
 
         .form-group input:focus {
             border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.10);
+        }
+
+        .metrics-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
         }
 
         .analyze-btn {
             width: 100%;
-            padding: 14px;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
+            padding: 14px;
+            margin-top: 5px;
             background: #2563eb;
             color: white;
             font-size: 15px;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 5px;
+            transition: 0.2s;
         }
 
         .analyze-btn:hover {
             background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .analyze-btn:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-note {
+            margin-top: 13px;
+            padding: 11px;
+            background: #f8fafc;
+            border-radius: 8px;
+            color: #64748b;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        /* ERROR */
+
+        .error {
+            display: none;
+            margin-top: 14px;
+            padding: 12px;
+            background: #fee2e2;
+            color: #991b1b;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
+        /* EMPTY */
+
+        .empty-result {
+            text-align: center;
+            padding: 55px 20px;
+            color: #64748b;
+        }
+
+        .empty-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            background: #eff6ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+        }
+
+        .empty-result h3 {
+            color: #334155;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .empty-result p {
+            font-size: 13px;
+            line-height: 1.5;
         }
 
         /* RESULT */
@@ -158,17 +332,42 @@
             display: none;
         }
 
+        .patient-info {
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            border-radius: 9px;
+            padding: 14px;
+            margin-bottom: 17px;
+        }
+
+        .patient-info p {
+            color: #475569;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .patient-info p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* RISK */
+
         .result-main {
             text-align: center;
-            padding: 25px;
-            border-radius: 12px;
+            padding: 24px;
             background: #f8fafc;
-            margin-bottom: 20px;
+            border-radius: 14px;
+            margin-bottom: 17px;
+        }
+
+        .risk-icon {
+            font-size: 35px;
+            margin-bottom: 7px;
         }
 
         .result-main h3 {
-            font-size: 26px;
-            margin-bottom: 8px;
+            font-size: 23px;
+            margin-bottom: 5px;
         }
 
         .risk-lower {
@@ -180,14 +379,54 @@
         }
 
         .score {
-            font-size: 40px;
+            font-size: 42px;
             font-weight: bold;
-            margin-top: 10px;
+            color: #172554;
+            margin-top: 7px;
         }
 
         .score-label {
             color: #64748b;
-            font-size: 13px;
+            font-size: 12px;
+        }
+
+        /* PROGRESS */
+
+        .progress-container {
+            margin-top: 16px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            color: #64748b;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 9px;
+            background: #e2e8f0;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 20px;
+            background: #2563eb;
+            transition: width 0.7s ease;
+        }
+
+        /* SECTION TITLE */
+
+        .section-title {
+            color: #334155;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 19px 0 11px;
         }
 
         /* METRICS */
@@ -195,95 +434,179 @@
         .metrics {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 11px;
         }
 
         .metric {
+            padding: 14px;
             background: #f8fafc;
-            padding: 15px;
+            border: 1px solid #e2e8f0;
             border-radius: 10px;
         }
 
         .metric small {
-            color: #64748b;
             display: block;
+            color: #64748b;
+            font-size: 11px;
             margin-bottom: 5px;
         }
 
         .metric strong {
+            color: #172554;
             font-size: 19px;
         }
 
-        /* PATIENT INFO */
+        /* INSIGHT */
 
-        .patient-info {
-            background: #eff6ff;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+        .insight {
+            margin-top: 17px;
+            background: #f0f9ff;
+            border-left: 4px solid #0ea5e9;
+            border-radius: 8px;
+            padding: 14px;
         }
 
-        .patient-info p {
+        .insight-title {
+            color: #0369a1;
+            font-size: 13px;
+            font-weight: bold;
             margin-bottom: 5px;
+        }
+
+        .insight p {
+            color: #475569;
+            font-size: 13px;
+            line-height: 1.5;
         }
 
         /* NOTICE */
 
         .notice {
-            margin-top: 25px;
+            margin-top: 17px;
             background: #fff7ed;
             border-left: 4px solid #f97316;
-            padding: 15px;
             border-radius: 8px;
+            padding: 13px;
             color: #7c2d12;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        /* LOADING */
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 45px 20px;
+        }
+
+        .spinner {
+            width: 38px;
+            height: 38px;
+            border: 4px solid #dbeafe;
+            border-top-color: #2563eb;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        .loading p {
+            color: #64748b;
             font-size: 13px;
         }
 
-        /* ERROR */
-
-        .error {
-            display: none;
-            margin-top: 15px;
-            padding: 12px;
-            background: #fee2e2;
-            color: #991b1b;
-            border-radius: 8px;
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         /* RESPONSIVE */
 
-        @media (max-width: 900px) {
+        @media (max-width: 1050px) {
 
-            .grid {
+            .analysis-grid {
                 grid-template-columns: 1fr;
             }
-
         }
 
-        @media (max-width: 700px) {
+        @media (max-width: 800px) {
 
             .sidebar {
-                width: 190px;
+                width: 200px;
             }
 
             .main {
-                margin-left: 190px;
-                padding: 20px;
+                margin-left: 200px;
+                padding: 22px;
             }
 
+            .top-header {
+                align-items: flex-start;
+                gap: 15px;
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 18px 12px;
+            }
+
+            .logo {
+                margin-bottom: 5px;
+            }
+
+            .sidebar-subtitle {
+                margin-bottom: 15px;
+            }
+
+            .nav {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 5px;
+            }
+
+            .nav a {
+                margin-bottom: 0;
+                font-size: 12px;
+            }
+
+            .sidebar-footer {
+                display: none;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 18px;
+            }
+
+            .hero {
+                padding: 21px;
+            }
+
+            .hero h2 {
+                font-size: 20px;
+            }
+
+            .metrics-form,
             .metrics {
                 grid-template-columns: 1fr;
             }
 
+            .header h1 {
+                font-size: 24px;
+            }
         }
-
     </style>
 
 </head>
 
-
 <body>
-
 
 <!-- SIDEBAR -->
 
@@ -293,25 +616,37 @@
         Ortho<span>Sense</span> AI
     </div>
 
+    <div class="sidebar-subtitle">
+        AI Healthcare Platform
+    </div>
+
     <div class="nav">
 
         <a href="/">
-            Dashboard
+            <span class="nav-icon">⌂</span>
+            <span>Dashboard</span>
         </a>
 
         <a href="/history">
-            Assessment History
+            <span class="nav-icon">▤</span>
+            <span>Assessment History</span>
         </a>
 
         <a href="/sensor-monitor">
-            Sensor Monitor
+            <span class="nav-icon">◉</span>
+            <span>Sensor Monitor</span>
         </a>
 
-        <a href="/ai-analysis"
-           class="active">
-            AI Analysis
+        <a href="/ai-analysis" class="active">
+            <span class="nav-icon">✦</span>
+            <span>AI Analysis</span>
         </a>
 
+    </div>
+
+    <div class="sidebar-footer">
+        OrthoSense AI v1.0<br>
+        AI-assisted movement screening
     </div>
 
 </div>
@@ -321,36 +656,79 @@
 
 <div class="main">
 
+    <!-- HEADER -->
 
-    <div class="header">
+    <div class="top-header">
 
-        <h1>
-            AI Movement Analysis
-        </h1>
+        <div class="header">
 
-        <p>
-            Analyze patient gait and movement using the OrthoSense AI model.
-        </p>
+            <h1>
+                AI Movement Analysis
+            </h1>
+
+            <p>
+                Analyze gait and movement metrics using the OrthoSense AI model.
+            </p>
+
+        </div>
+
+        <div class="system-status">
+
+            <span class="status-dot"></span>
+
+            System Online
+
+        </div>
 
     </div>
 
 
+    <!-- HERO -->
 
-    <div class="grid">
+    <div class="hero">
+
+        <h2>
+            Intelligent Movement Assessment
+        </h2>
+
+        <p>
+            Enter patient movement parameters to generate an AI-assisted
+            orthopedic movement screening estimate. The analysis combines
+            gait metrics and movement characteristics to estimate risk.
+        </p>
+
+        <span class="hero-tag">
+            AI-assisted • Sensor-ready • Movement Intelligence
+        </span>
+
+    </div>
+
+
+    <!-- ANALYSIS GRID -->
+
+    <div class="analysis-grid">
 
 
         <!-- INPUT CARD -->
 
         <div class="card">
 
-            <h2>
-                Patient Assessment
-            </h2>
+            <div class="card-header">
+
+                <h2>
+                    Patient Assessment
+                </h2>
+
+                <span>
+                    Required inputs
+                </span>
+
+            </div>
 
 
             <div class="form-group">
 
-                <label>
+                <label for="patient_id">
                     Patient ID
                 </label>
 
@@ -364,156 +742,252 @@
 
             <div class="form-group">
 
-                <label>
+                <label for="age">
                     Age
                 </label>
 
                 <input
                     type="number"
                     id="age"
+                    min="1"
+                    max="120"
                     placeholder="Enter age">
 
             </div>
 
 
-            <div class="form-group">
-
-                <label>
-                    Step Count
-                </label>
-
-                <input
-                    type="number"
-                    id="step_count"
-                    placeholder="Example: 100">
-
+            <div class="section-title">
+                Movement Parameters
             </div>
 
 
-            <div class="form-group">
+            <div class="metrics-form">
 
-                <label>
-                    Cadence
-                </label>
+                <div class="form-group">
 
-                <input
-                    type="number"
-                    id="cadence"
-                    placeholder="Example: 75">
+                    <label for="step_count">
+                        Step Count
+                    </label>
 
-            </div>
+                    <input
+                        type="number"
+                        id="step_count"
+                        min="0"
+                        placeholder="Example: 100">
 
-
-            <div class="form-group">
-
-                <label>
-                    Balance
-                </label>
-
-                <input
-                    type="number"
-                    id="balance"
-                    placeholder="Example: 85">
-
-            </div>
+                </div>
 
 
-            <div class="form-group">
+                <div class="form-group">
 
-                <label>
-                    Symmetry
-                </label>
+                    <label for="cadence">
+                        Cadence
+                    </label>
 
-                <input
-                    type="number"
-                    id="symmetry"
-                    placeholder="Example: 90">
+                    <input
+                        type="number"
+                        id="cadence"
+                        min="0"
+                        placeholder="Example: 75">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="balance">
+                        Balance
+                    </label>
+
+                    <input
+                        type="number"
+                        id="balance"
+                        min="0"
+                        placeholder="Example: 80">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="symmetry">
+                        Symmetry
+                    </label>
+
+                    <input
+                        type="number"
+                        id="symmetry"
+                        min="0"
+                        placeholder="Example: 85">
+
+                </div>
 
             </div>
 
 
             <button
                 class="analyze-btn"
-                onclick="analyzeMovement()">
+                id="analyzeButton"
+                onclick="runAnalysis()">
 
-                Analyze Movement
+                ✦ Analyze Movement
 
             </button>
 
 
             <div
                 class="error"
-                id="error">
+                id="errorMessage">
+            </div>
 
-                Unable to perform analysis.
+
+            <div class="form-note">
+
+                <strong>Tip:</strong>
+                Use sensor-derived movement values when available.
+                All fields should contain valid numerical measurements.
 
             </div>
 
         </div>
 
 
-
         <!-- RESULT CARD -->
 
         <div class="card">
 
-            <h2>
-                AI Assessment Result
-            </h2>
+            <div class="card-header">
 
+                <h2>
+                    AI Analysis Result
+                </h2>
+
+                <span>
+                    Model output
+                </span>
+
+            </div>
+
+
+            <!-- EMPTY STATE -->
+
+            <div
+                class="empty-result"
+                id="emptyResult">
+
+                <div class="empty-icon">
+                    ✦
+                </div>
+
+                <h3>
+                    Ready for Analysis
+                </h3>
+
+                <p>
+                    Enter the patient information and movement
+                    parameters, then click Analyze Movement.
+                </p>
+
+            </div>
+
+
+            <!-- LOADING -->
+
+            <div
+                class="loading"
+                id="loading">
+
+                <div class="spinner"></div>
+
+                <p>
+                    AI model is analyzing movement data...
+                </p>
+
+            </div>
+
+
+            <!-- RESULT -->
 
             <div
                 class="result-box"
                 id="resultBox">
 
 
+                <!-- PATIENT -->
+
                 <div class="patient-info">
 
                     <p>
-                        <strong>Patient ID:</strong>
-                        <span id="resultPatient">
-                            -
-                        </span>
+                        <strong>Patient:</strong>
+                        <span id="resultPatient">-</span>
                     </p>
 
                     <p>
                         <strong>Age:</strong>
-                        <span id="resultAge">
-                            -
-                        </span>
-                    </p>
-
-                    <p>
-                        <strong>Assessment Time:</strong>
-                        <span id="assessmentTime">
-                            -
-                        </span>
+                        <span id="resultAge">-</span>
                     </p>
 
                 </div>
 
 
+                <!-- RISK -->
 
                 <div class="result-main">
+
+                    <div
+                        class="risk-icon"
+                        id="riskIcon">
+                        ●
+                    </div>
 
                     <h3 id="riskResult">
                         -
                     </h3>
 
-                    <div class="score"
-                         id="riskScore">
-
+                    <div
+                        class="score"
+                        id="riskScore">
                         0%
-
                     </div>
 
                     <div class="score-label">
-                        AI Risk Score
+                        Estimated movement risk score
+                    </div>
+
+
+                    <div class="progress-container">
+
+                        <div class="progress-label">
+
+                            <span>
+                                Risk Level
+                            </span>
+
+                            <span id="riskPercent">
+                                0%
+                            </span>
+
+                        </div>
+
+                        <div class="progress-bar">
+
+                            <div
+                                class="progress-fill"
+                                id="riskProgress">
+                            </div>
+
+                        </div>
+
                     </div>
 
                 </div>
 
 
+                <!-- MOVEMENT QUALITY -->
+
+                <div class="section-title">
+                    Movement Metrics
+                </div>
 
                 <div class="metrics">
 
@@ -584,47 +1058,45 @@
                 </div>
 
 
-                <div class="notice">
+                <!-- INSIGHT -->
 
-                    This AI result is intended to support
-                    movement assessment and should not replace
-                    professional clinical evaluation.
+                <div class="insight">
+
+                    <div class="insight-title">
+                        AI Interpretation
+                    </div>
+
+                    <p id="insightText">
+                        Analysis completed successfully.
+                    </p>
 
                 </div>
 
 
-            </div>
+                <!-- NOTICE -->
 
+                <div class="notice">
 
-            <div id="emptyResult"
-                 style="text-align:center;
-                        padding:60px 20px;
-                        color:#64748b;">
+                    <strong>Clinical Notice:</strong>
+                    This AI output is intended for movement screening
+                    and research assistance. It should not replace
+                    evaluation or diagnosis by a qualified healthcare
+                    professional.
 
-                <h3>
-                    Ready for Analysis
-                </h3>
-
-                <p style="margin-top:10px;">
-                    Enter patient movement data and click
-                    <strong>Analyze Movement</strong>.
-                </p>
+                </div>
 
             </div>
 
         </div>
 
-
     </div>
-
 
 </div>
 
 
-
 <script>
 
-async function analyzeMovement() {
+async function runAnalysis() {
 
     const patientId =
         document.getElementById("patient_id").value.trim();
@@ -645,192 +1117,247 @@ async function analyzeMovement() {
         document.getElementById("symmetry").value;
 
 
-    const errorBox =
-        document.getElementById("error");
+    const errorMessage =
+        document.getElementById("errorMessage");
+
+    const emptyResult =
+        document.getElementById("emptyResult");
+
+    const resultBox =
+        document.getElementById("resultBox");
+
+    const loading =
+        document.getElementById("loading");
+
+    const button =
+        document.getElementById("analyzeButton");
 
 
-    errorBox.style.display = "none";
+    errorMessage.style.display = "none";
 
+
+    /* VALIDATION */
 
     if (
-        patientId === "" ||
-        age === "" ||
-        stepCount === "" ||
-        cadence === "" ||
-        balance === "" ||
-        symmetry === ""
+        !patientId ||
+        !age ||
+        !stepCount ||
+        !cadence ||
+        !balance ||
+        !symmetry
     ) {
 
-        errorBox.innerText =
-            "Please enter all patient and movement details.";
+        errorMessage.textContent =
+            "Please fill in all patient and movement fields.";
 
-        errorBox.style.display = "block";
+        errorMessage.style.display = "block";
 
         return;
-
     }
+
+
+    /* LOADING */
+
+    emptyResult.style.display = "none";
+    resultBox.style.display = "none";
+    loading.style.display = "block";
+
+    button.disabled = true;
+    button.textContent = "Analyzing...";
 
 
     try {
 
-        const response =
-            await fetch("/predict", {
+        const response = await fetch("/predict", {
 
-                method: "POST",
+            method: "POST",
 
-                headers: {
-                    "Content-Type":
-                        "application/json"
-                },
+            headers: {
+                "Content-Type": "application/json"
+            },
 
-                body: JSON.stringify({
+            body: JSON.stringify({
 
-                    patient_id: patientId,
+                patient_id: patientId,
 
-                    age: Number(age),
+                age: Number(age),
 
-                    step_count:
-                        Number(stepCount),
+                step_count: Number(stepCount),
 
-                    cadence:
-                        Number(cadence),
+                cadence: Number(cadence),
 
-                    balance:
-                        Number(balance),
+                balance: Number(balance),
 
-                    symmetry:
-                        Number(symmetry)
+                symmetry: Number(symmetry)
 
-                })
+            })
 
-            });
+        });
 
 
         if (!response.ok) {
 
             throw new Error(
-                "Server error"
+                "Unable to connect to the AI analysis service."
             );
 
         }
 
 
-        const data =
-            await response.json();
+        const data = await response.json();
 
 
-        /* SHOW RESULT */
+        /* HIDE LOADING */
 
-        document.getElementById(
-            "emptyResult"
-        ).style.display = "none";
-
-
-        document.getElementById(
-            "resultBox"
-        ).style.display = "block";
+        loading.style.display = "none";
 
 
         /* PATIENT */
 
-        document.getElementById(
-            "resultPatient"
-        ).innerText = patientId;
+        document.getElementById("resultPatient").textContent =
+            patientId;
 
-
-        document.getElementById(
-            "resultAge"
-        ).innerText = age;
-
-
-        document.getElementById(
-            "assessmentTime"
-        ).innerText =
-            new Date().toLocaleString();
-
-
-        /* RISK */
-
-        const riskElement =
-            document.getElementById(
-                "riskResult"
-            );
-
-
-        riskElement.innerText =
-            data.risk;
-
-
-        if (
-            data.risk === "Higher Risk"
-        ) {
-
-            riskElement.className =
-                "risk-higher";
-
-        } else {
-
-            riskElement.className =
-                "risk-lower";
-
-        }
-
-
-        /* SCORE */
-
-        document.getElementById(
-            "riskScore"
-        ).innerText =
-            data.risk_score + "%";
+        document.getElementById("resultAge").textContent =
+            age;
 
 
         /* METRICS */
 
-        document.getElementById(
-            "resultSteps"
-        ).innerText =
-            data.step_count;
+        document.getElementById("resultSteps").textContent =
+            stepCount;
+
+        document.getElementById("resultCadence").textContent =
+            cadence;
+
+        document.getElementById("resultBalance").textContent =
+            balance;
+
+        document.getElementById("resultSymmetry").textContent =
+            symmetry;
 
 
-        document.getElementById(
-            "resultCadence"
-        ).innerText =
-            data.cadence;
+        /* RISK */
+
+        const risk =
+            data.risk ||
+            data.prediction ||
+            "Unknown";
 
 
-        document.getElementById(
-            "resultBalance"
-        ).innerText =
-            data.balance;
+        let riskScore =
+            Number(
+                data.risk_score ??
+                data.riskScore ??
+                0
+            );
 
 
-        document.getElementById(
-            "resultSymmetry"
-        ).innerText =
-            data.symmetry;
+        riskScore =
+            Math.max(0, Math.min(100, riskScore));
 
 
-        document.getElementById(
-            "resultQuality"
-        ).innerText =
-            data.movement_quality;
+        const movementQuality =
+            Number(
+                data.movement_quality ??
+                data.movementQuality ??
+                0
+            );
+
+
+        document.getElementById("riskResult").textContent =
+            risk;
+
+        document.getElementById("riskScore").textContent =
+            riskScore.toFixed(1) + "%";
+
+        document.getElementById("riskPercent").textContent =
+            riskScore.toFixed(1) + "%";
+
+        document.getElementById("riskProgress").style.width =
+            riskScore + "%";
+
+
+        document.getElementById("resultQuality").textContent =
+            movementQuality.toFixed(1) + "%";
+
+
+        /* RISK COLOR */
+
+        const riskResult =
+            document.getElementById("riskResult");
+
+        const riskIcon =
+            document.getElementById("riskIcon");
+
+
+        if (
+            String(risk).toLowerCase().includes("higher") ||
+            String(risk).toLowerCase().includes("high")
+        ) {
+
+            riskResult.className = "risk-higher";
+
+            riskIcon.textContent = "⚠️";
+
+        } else {
+
+            riskResult.className = "risk-lower";
+
+            riskIcon.textContent = "✓";
+
+        }
+
+
+        /* AI INSIGHT */
+
+        const insightText =
+            document.getElementById("insightText");
+
+
+        if (
+            String(risk).toLowerCase().includes("higher") ||
+            String(risk).toLowerCase().includes("high")
+        ) {
+
+            insightText.textContent =
+                "The current movement measurements indicate a higher estimated movement risk. Consider reviewing the individual gait parameters and, where appropriate, seeking professional clinical evaluation.";
+
+        } else {
+
+            insightText.textContent =
+                "The current movement measurements indicate a lower estimated movement risk. Continue monitoring movement patterns and compare future assessments for changes.";
+
+        }
+
+
+        /* SHOW RESULT */
+
+        resultBox.style.display = "block";
 
 
     } catch (error) {
 
-        console.error(error);
+        loading.style.display = "none";
 
-        errorBox.innerText =
-            "Unable to connect to the AI server. Make sure Flask is running.";
+        errorMessage.textContent =
+            error.message ||
+            "Something went wrong while analyzing the movement data.";
 
-        errorBox.style.display = "block";
+        errorMessage.style.display = "block";
+
+        emptyResult.style.display = "block";
 
     }
+
+
+    button.disabled = false;
+
+    button.textContent =
+        "✦ Analyze Movement";
 
 }
 
 </script>
-
 
 </body>
 

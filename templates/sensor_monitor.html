@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,99 +21,237 @@
         }
 
         body {
-            background: #f4f7fb;
-            color: #1f2937;
+            background: #f1f5f9;
+            color: #1e293b;
         }
+
+        /* SIDEBAR */
 
         .sidebar {
             position: fixed;
             left: 0;
             top: 0;
-            width: 240px;
+            width: 245px;
             height: 100vh;
-            background: #111827;
+            background: #0f172a;
             color: white;
-            padding: 25px 15px;
+            padding: 28px 16px;
+            z-index: 10;
         }
 
         .logo {
             text-align: center;
             font-size: 23px;
             font-weight: bold;
-            margin-bottom: 35px;
+            margin-bottom: 8px;
         }
 
         .logo span {
             color: #38bdf8;
         }
 
-        .menu a {
-            display: block;
-            text-decoration: none;
-            color: #cbd5e1;
-            padding: 14px 15px;
-            margin: 7px 0;
-            border-radius: 8px;
+        .sidebar-subtitle {
+            text-align: center;
+            color: #64748b;
+            font-size: 12px;
+            margin-bottom: 35px;
         }
 
-        .menu a:hover,
-        .menu a.active {
-            background: #1e40af;
+        .menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #cbd5e1;
+            padding: 14px 16px;
+            margin-bottom: 8px;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
+
+        .menu a:hover {
+            background: #1e293b;
             color: white;
         }
 
+        .menu a.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        .nav-icon {
+            font-size: 18px;
+        }
+
+        .sidebar-bottom {
+            position: absolute;
+            bottom: 25px;
+            left: 20px;
+            right: 20px;
+            padding: 14px;
+            background: #1e293b;
+            border-radius: 10px;
+            color: #94a3b8;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .sidebar-bottom strong {
+            display: block;
+            color: #38bdf8;
+            margin-bottom: 5px;
+        }
+
+        /* MAIN */
+
         .main {
-            margin-left: 240px;
-            padding: 35px;
+            margin-left: 245px;
+            padding: 32px;
         }
 
         .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 25px;
         }
 
         .header h1 {
             font-size: 30px;
-            margin-bottom: 8px;
+            margin-bottom: 7px;
         }
 
         .header p {
             color: #64748b;
         }
 
-        .status {
+        .system-status {
+            background: #dcfce7;
+            color: #15803d;
+            padding: 10px 16px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        /* MONITOR BANNER */
+
+        .monitor-banner {
+            background: linear-gradient(
+                135deg,
+                #1d4ed8,
+                #0284c7
+            );
+
+            color: white;
+            padding: 28px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .monitor-banner::after {
+            content: "LIVE";
+            position: absolute;
+            right: 35px;
+            top: 8px;
+            font-size: 70px;
+            font-weight: bold;
+            opacity: 0.08;
+        }
+
+        .monitor-banner h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .monitor-banner p {
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        /* CONNECTION */
+
+        .connection-card {
+            background: white;
+            padding: 18px 22px;
+            border-radius: 13px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: space-between;
             margin-bottom: 25px;
-            color: #15803d;
+        }
+
+        .connection-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .connection-dot {
+            width: 13px;
+            height: 13px;
+            background: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 0 5px #dcfce7;
+        }
+
+        .connection-dot.disconnected {
+            background: #ef4444;
+            box-shadow: 0 0 0 5px #fee2e2;
+        }
+
+        .connection-title {
             font-weight: bold;
         }
 
-        .dot {
-            width: 12px;
-            height: 12px;
-            background: #22c55e;
-            border-radius: 50%;
+        .connection-subtitle {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 3px;
         }
+
+        .update-label {
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        /* SENSOR GRID */
 
         .sensor-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            gap: 18px;
             margin-bottom: 25px;
         }
 
         .sensor-card {
             background: white;
-            padding: 25px;
-            border-radius: 14px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            padding: 23px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-top: 4px solid #2563eb;
+        }
+
+        .sensor-card:nth-child(2) {
+            border-top-color: #7c3aed;
+        }
+
+        .sensor-card:nth-child(3) {
+            border-top-color: #16a34a;
+        }
+
+        .sensor-card:nth-child(4) {
+            border-top-color: #f59e0b;
         }
 
         .sensor-card h3 {
             color: #64748b;
-            font-size: 15px;
-            margin-bottom: 15px;
+            font-size: 13px;
+            margin-bottom: 13px;
+            text-transform: uppercase;
         }
 
         .value {
@@ -122,8 +261,19 @@
 
         .unit {
             color: #64748b;
-            font-size: 14px;
+            font-size: 13px;
+            margin-left: 4px;
         }
+
+        .live-label {
+            display: block;
+            margin-top: 10px;
+            color: #16a34a;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        /* AI GRID */
 
         .ai-grid {
             display: grid;
@@ -133,17 +283,35 @@
 
         .ai-card {
             background: white;
-            padding: 30px;
-            border-radius: 14px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            padding: 27px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .ai-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
         }
 
         .ai-card h2 {
-            margin-bottom: 20px;
+            font-size: 20px;
         }
 
+        .ai-badge {
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        /* RISK */
+
         .risk {
-            font-size: 26px;
+            font-size: 28px;
             font-weight: bold;
         }
 
@@ -155,26 +323,68 @@
             color: #dc2626;
         }
 
+        .risk-waiting {
+            color: #64748b;
+        }
+
+        .score-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 18px;
+        }
+
+        .score-label {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .score-value {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* PROGRESS */
+
         .progress {
             width: 100%;
-            height: 12px;
+            height: 11px;
             background: #e5e7eb;
             border-radius: 10px;
             overflow: hidden;
-            margin-top: 12px;
+            margin-top: 10px;
         }
 
         .progress-bar {
             height: 100%;
             width: 0%;
             background: #2563eb;
+            border-radius: 10px;
             transition: width 0.5s;
         }
 
+        #risk_bar {
+            background: #dc2626;
+        }
+
+        #quality_bar {
+            background: #16a34a;
+        }
+
+        /* QUALITY */
+
         .quality-number {
-            font-size: 42px;
+            font-size: 45px;
             font-weight: bold;
         }
+
+        .quality-description {
+            color: #64748b;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        /* BACK BUTTON */
 
         .back-btn {
             display: inline-block;
@@ -184,44 +394,88 @@
             color: white;
             text-decoration: none;
             border-radius: 8px;
+            font-weight: bold;
+            font-size: 13px;
         }
 
-        @media (max-width: 1000px) {
+        .back-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1100px) {
 
             .sensor-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+        @media (max-width: 850px) {
+
+            .sidebar {
+                width: 200px;
+            }
+
+            .main {
+                margin-left: 200px;
+                padding: 20px;
             }
 
             .ai-grid {
                 grid-template-columns: 1fr;
             }
 
+            .header {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 15px;
+            }
+
         }
 
-        @media (max-width: 700px) {
+        @media (max-width: 600px) {
 
             .sidebar {
                 position: relative;
                 width: 100%;
                 height: auto;
+                padding: 18px;
             }
 
-            .main {
-                margin-left: 0;
-                padding: 20px;
+            .sidebar-bottom {
+                display: none;
             }
 
             .menu {
                 display: flex;
                 overflow-x: auto;
+                gap: 5px;
             }
 
             .menu a {
                 white-space: nowrap;
+                margin-bottom: 0;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 15px;
             }
 
             .sensor-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .monitor-banner h2 {
+                font-size: 21px;
+            }
+
+            .connection-card {
+                align-items: flex-start;
+                gap: 10px;
+                flex-direction: column;
             }
 
         }
@@ -234,65 +488,142 @@
 <body>
 
 
+<!-- SIDEBAR -->
+
 <div class="sidebar">
 
     <div class="logo">
         Ortho<span>Sense</span> AI
     </div>
 
+    <div class="sidebar-subtitle">
+        AI Healthcare Platform
+    </div>
+
     <div class="menu">
 
         <a href="/">
+            <span class="nav-icon">⌂</span>
             Dashboard
         </a>
 
         <a href="/history">
+            <span class="nav-icon">▣</span>
             Assessment History
         </a>
 
         <a href="/sensor-monitor" class="active">
+            <span class="nav-icon">◉</span>
             Sensor Monitor
         </a>
 
         <a href="/ai-analysis">
+            <span class="nav-icon">✦</span>
             AI Analysis
         </a>
+
+    </div>
+
+    <div class="sidebar-bottom">
+
+        <strong>● System Online</strong>
+
+        OrthoSense AI v1.0
 
     </div>
 
 </div>
 
 
+<!-- MAIN -->
+
 <div class="main">
 
 
+    <!-- HEADER -->
+
     <div class="header">
 
-        <h1>Live Sensor Monitoring</h1>
+        <div>
+
+            <h1>
+                Live Sensor Monitoring
+            </h1>
+
+            <p>
+                Real-time orthopedic movement monitoring.
+            </p>
+
+        </div>
+
+        <div class="system-status">
+            ● System Online
+        </div>
+
+    </div>
+
+
+    <!-- MONITOR BANNER -->
+
+    <div class="monitor-banner">
+
+        <h2>
+            Real-Time Movement Intelligence
+        </h2>
 
         <p>
-            Real-time orthopedic movement monitoring.
+            Monitor gait parameters continuously and
+            view AI-assisted movement analysis as new
+            sensor data becomes available.
         </p>
 
     </div>
 
 
-    <div class="status">
+    <!-- CONNECTION -->
 
-        <div class="dot"></div>
+    <div class="connection-card">
 
-        <span id="connection">
-            Sensor Connected
-        </span>
+        <div class="connection-left">
+
+            <div
+                class="connection-dot"
+                id="connectionDot">
+            </div>
+
+            <div>
+
+                <div
+                    class="connection-title"
+                    id="connection">
+                    Sensor Connected
+                </div>
+
+                <div class="connection-subtitle">
+                    Live sensor data connection
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="update-label">
+            Updates every 2 seconds
+        </div>
 
     </div>
 
 
+    <!-- SENSOR VALUES -->
+
     <div class="sensor-grid">
+
 
         <div class="sensor-card">
 
-            <h3>Step Count</h3>
+            <h3>
+                Step Count
+            </h3>
 
             <span
                 class="value"
@@ -304,12 +635,18 @@
                 steps
             </span>
 
+            <span class="live-label">
+                ● LIVE DATA
+            </span>
+
         </div>
 
 
         <div class="sensor-card">
 
-            <h3>Cadence</h3>
+            <h3>
+                Cadence
+            </h3>
 
             <span
                 class="value"
@@ -321,12 +658,18 @@
                 steps/min
             </span>
 
+            <span class="live-label">
+                ● LIVE DATA
+            </span>
+
         </div>
 
 
         <div class="sensor-card">
 
-            <h3>Balance</h3>
+            <h3>
+                Balance
+            </h3>
 
             <span
                 class="value"
@@ -338,12 +681,18 @@
                 %
             </span>
 
+            <span class="live-label">
+                ● LIVE DATA
+            </span>
+
         </div>
 
 
         <div class="sensor-card">
 
-            <h3>Symmetry</h3>
+            <h3>
+                Symmetry
+            </h3>
 
             <span
                 class="value"
@@ -355,32 +704,62 @@
                 %
             </span>
 
+            <span class="live-label">
+                ● LIVE DATA
+            </span>
+
         </div>
 
     </div>
 
 
+    <!-- AI ANALYSIS -->
+
     <div class="ai-grid">
 
 
+        <!-- RISK -->
+
         <div class="ai-card">
 
-            <h2>AI Risk Assessment</h2>
+            <div class="ai-card-header">
 
-            <div
-                class="risk"
-                id="risk">
-                Waiting...
+                <h2>
+                    AI Risk Assessment
+                </h2>
+
+                <span class="ai-badge">
+                    AI ANALYSIS
+                </span>
+
             </div>
 
-            <br>
 
-            <p>
-                Risk Score:
-                <strong id="risk_score">
+            <div
+                class="risk risk-waiting"
+                id="risk">
+
+                Waiting...
+
+            </div>
+
+
+            <div class="score-row">
+
+                <span class="score-label">
+                    Risk Score
+                </span>
+
+                <strong
+                    class="score-value"
+                    id="risk_score">
+
                     0%
+
                 </strong>
-            </p>
+
+            </div>
+
 
             <div class="progress">
 
@@ -394,9 +773,22 @@
         </div>
 
 
+        <!-- QUALITY -->
+
         <div class="ai-card">
 
-            <h2>Movement Quality</h2>
+            <div class="ai-card-header">
+
+                <h2>
+                    Movement Quality
+                </h2>
+
+                <span class="ai-badge">
+                    MOVEMENT AI
+                </span>
+
+            </div>
+
 
             <div class="quality-number">
 
@@ -406,7 +798,11 @@
 
             </div>
 
-            <br>
+
+            <div class="quality-description">
+                Overall movement quality estimate
+            </div>
+
 
             <div class="progress">
 
@@ -422,8 +818,12 @@
     </div>
 
 
-    <a href="/" class="back-btn">
+    <a
+        href="/"
+        class="back-btn">
+
         ← Back to Dashboard
+
     </a>
 
 
@@ -432,80 +832,188 @@
 
 <script>
 
+
 async function updateSensorData() {
 
     try {
 
         const response =
-            await fetch("/latest-sensor");
+            await fetch(
+                "/latest-sensor"
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Sensor request failed"
+            );
+
+        }
+
 
         const data =
             await response.json();
 
 
-        document.getElementById("step_count").textContent =
-            data.step_count;
+        /* SENSOR VALUES */
 
-        document.getElementById("cadence").textContent =
-            data.cadence;
-
-        document.getElementById("balance").textContent =
-            data.balance;
-
-        document.getElementById("symmetry").textContent =
-            data.symmetry;
+        document.getElementById(
+            "step_count"
+        ).textContent =
+            data.step_count ?? 0;
 
 
-        document.getElementById("risk").textContent =
-            data.risk;
-
-        document.getElementById("risk_score").textContent =
-            data.risk_score + "%";
-
-        document.getElementById("movement_quality").textContent =
-            data.movement_quality;
+        document.getElementById(
+            "cadence"
+        ).textContent =
+            data.cadence ?? 0;
 
 
-        document.getElementById("risk_bar").style.width =
-            data.risk_score + "%";
+        document.getElementById(
+            "balance"
+        ).textContent =
+            data.balance ?? 0;
 
-        document.getElementById("quality_bar").style.width =
-            data.movement_quality + "%";
 
+        document.getElementById(
+            "symmetry"
+        ).textContent =
+            data.symmetry ?? 0;
+
+
+        /* AI */
 
         const risk =
-            document.getElementById("risk");
+            data.risk ?? "Waiting...";
 
 
-        if (data.risk === "Higher Risk") {
+        document.getElementById(
+            "risk"
+        ).textContent =
+            risk;
 
-            risk.className =
+
+        const riskScore =
+            Number(
+                data.risk_score
+            ) || 0;
+
+
+        const quality =
+            Number(
+                data.movement_quality
+            ) || 0;
+
+
+        document.getElementById(
+            "risk_score"
+        ).textContent =
+            riskScore + "%";
+
+
+        document.getElementById(
+            "movement_quality"
+        ).textContent =
+            quality;
+
+
+        /* PROGRESS */
+
+        document.getElementById(
+            "risk_bar"
+        ).style.width =
+            Math.min(
+                riskScore,
+                100
+            ) + "%";
+
+
+        document.getElementById(
+            "quality_bar"
+        ).style.width =
+            Math.min(
+                quality,
+                100
+            ) + "%";
+
+
+        /* RISK COLOR */
+
+        const riskElement =
+            document.getElementById(
+                "risk"
+            );
+
+
+        if (
+            risk === "Higher Risk"
+        ) {
+
+            riskElement.className =
                 "risk risk-high";
 
-        } else {
+        }
 
-            risk.className =
+        else if (
+            risk === "Lower Risk"
+        ) {
+
+            riskElement.className =
                 "risk risk-low";
 
         }
 
+        else {
 
-        document.getElementById("connection").textContent =
+            riskElement.className =
+                "risk risk-waiting";
+
+        }
+
+
+        /* CONNECTION */
+
+        document.getElementById(
+            "connection"
+        ).textContent =
             "Sensor Connected";
+
+
+        document.getElementById(
+            "connectionDot"
+        ).classList.remove(
+            "disconnected"
+        );
 
     }
 
+
     catch (error) {
 
-        document.getElementById("connection").textContent =
+        document.getElementById(
+            "connection"
+        ).textContent =
             "Sensor Disconnected";
+
+
+        document.getElementById(
+            "connectionDot"
+        ).classList.add(
+            "disconnected"
+        );
 
     }
 
 }
 
 
+/* INITIAL LOAD */
+
 updateSensorData();
+
+
+/* LIVE UPDATE */
 
 setInterval(
     updateSensorData,
@@ -518,3 +1026,4 @@ setInterval(
 </body>
 
 </html>
+```

@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,8 +21,8 @@
         }
 
         body {
-            background: #f4f7fb;
-            color: #1f2937;
+            background: #f1f5f9;
+            color: #1e293b;
         }
 
         /* SIDEBAR */
@@ -30,31 +31,41 @@
             position: fixed;
             left: 0;
             top: 0;
-            width: 240px;
+            width: 245px;
             height: 100vh;
-            background: #111827;
-            padding: 25px 15px;
+            background: #0f172a;
+            padding: 28px 16px;
+            z-index: 10;
         }
 
         .logo {
             color: white;
-            font-size: 22px;
+            font-size: 23px;
             font-weight: bold;
             text-align: center;
-            margin-bottom: 35px;
+            margin-bottom: 8px;
         }
 
         .logo span {
             color: #38bdf8;
         }
 
+        .sidebar-subtitle {
+            text-align: center;
+            color: #64748b;
+            font-size: 12px;
+            margin-bottom: 35px;
+        }
+
         .nav a {
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 12px;
             text-decoration: none;
             color: #cbd5e1;
-            padding: 14px 18px;
+            padding: 14px 16px;
             margin-bottom: 8px;
-            border-radius: 8px;
+            border-radius: 10px;
             transition: 0.2s;
         }
 
@@ -68,36 +79,112 @@
             color: white;
         }
 
+        .nav-icon {
+            font-size: 18px;
+        }
+
+        .sidebar-bottom {
+            position: absolute;
+            bottom: 25px;
+            left: 20px;
+            right: 20px;
+            padding: 14px;
+            background: #1e293b;
+            border-radius: 10px;
+            color: #94a3b8;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .sidebar-bottom strong {
+            display: block;
+            color: #38bdf8;
+            margin-bottom: 5px;
+        }
+
         /* MAIN */
 
         .main {
-            margin-left: 240px;
-            padding: 35px;
+            margin-left: 245px;
+            padding: 32px;
         }
 
         .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 25px;
         }
 
         .header h1 {
             font-size: 30px;
-            margin-bottom: 8px;
+            margin-bottom: 7px;
         }
 
         .header p {
             color: #64748b;
         }
 
+        .system-status {
+            background: #dcfce7;
+            color: #15803d;
+            padding: 10px 16px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        /* SUMMARY */
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .summary-card small {
+            color: #64748b;
+        }
+
+        .summary-card h2 {
+            margin-top: 8px;
+            font-size: 26px;
+        }
+
         /* CARD */
 
         .card {
             background: white;
-            border-radius: 14px;
+            border-radius: 15px;
             padding: 25px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
         }
 
-        /* PATIENT SEARCH */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .card-header h2 {
+            font-size: 20px;
+        }
+
+        .card-header span {
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        /* SEARCH */
 
         .search-box {
             display: flex;
@@ -107,14 +194,19 @@
 
         .search-box input {
             flex: 1;
-            padding: 12px;
-            border: 1px solid #d1d5db;
+            padding: 13px;
+            border: 1px solid #cbd5e1;
             border-radius: 8px;
             outline: none;
         }
 
+        .search-box input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+        }
+
         .search-box button {
-            padding: 12px 20px;
+            padding: 12px 22px;
             border: none;
             border-radius: 8px;
             background: #2563eb;
@@ -132,38 +224,46 @@
         .table-container {
             width: 100%;
             overflow-x: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 1100px;
+            min-width: 1150px;
         }
 
         th {
-            background: #f1f5f9;
+            background: #f8fafc;
             color: #475569;
             text-align: left;
-            padding: 14px;
-            font-size: 13px;
+            padding: 15px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
         }
 
         td {
-            padding: 14px;
+            padding: 15px;
             border-top: 1px solid #e5e7eb;
-            font-size: 14px;
+            font-size: 13px;
         }
 
-        tr:hover {
+        tbody tr {
+            transition: 0.15s;
+        }
+
+        tbody tr:hover {
             background: #f8fafc;
         }
 
         /* RISK */
 
         .risk {
-            padding: 6px 10px;
+            padding: 6px 11px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
             display: inline-block;
         }
@@ -178,17 +278,25 @@
             color: #991b1b;
         }
 
-        /* PATIENT BUTTON */
+        /* PATIENT ID */
+
+        .patient-id {
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        /* VIEW BUTTON */
 
         .patient-btn {
             display: inline-block;
             text-decoration: none;
             background: #eff6ff;
             color: #2563eb;
-            padding: 7px 12px;
-            border-radius: 6px;
+            padding: 7px 13px;
+            border-radius: 7px;
             font-weight: bold;
             font-size: 12px;
+            transition: 0.2s;
         }
 
         .patient-btn:hover {
@@ -199,20 +307,32 @@
 
         .empty {
             text-align: center;
-            padding: 50px;
+            padding: 65px 20px;
             color: #64748b;
+        }
+
+        .empty-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .empty h3 {
+            color: #334155;
+            margin-bottom: 8px;
         }
 
         /* BACK BUTTON */
 
         .back-btn {
             display: inline-block;
-            margin-top: 20px;
+            margin-top: 22px;
             padding: 11px 18px;
             background: #2563eb;
             color: white;
             text-decoration: none;
             border-radius: 8px;
+            font-weight: bold;
+            font-size: 13px;
         }
 
         .back-btn:hover {
@@ -221,19 +341,76 @@
 
         /* RESPONSIVE */
 
+        @media (max-width: 1000px) {
+
+            .summary {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
         @media (max-width: 800px) {
 
             .sidebar {
-                width: 190px;
+                width: 200px;
             }
 
             .main {
-                margin-left: 190px;
+                margin-left: 200px;
                 padding: 20px;
             }
 
+            .header {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 15px;
+            }
+
             .header h1 {
-                font-size: 24px;
+                font-size: 25px;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 18px;
+            }
+
+            .sidebar-bottom {
+                display: none;
+            }
+
+            .nav {
+                display: flex;
+                overflow-x: auto;
+                gap: 5px;
+            }
+
+            .nav a {
+                white-space: nowrap;
+                margin-bottom: 0;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 15px;
+            }
+
+            .summary {
+                grid-template-columns: 1fr;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            .search-box button {
+                width: 100%;
             }
 
         }
@@ -254,29 +431,43 @@
         Ortho<span>Sense</span> AI
     </div>
 
+    <div class="sidebar-subtitle">
+        AI Healthcare Platform
+    </div>
+
     <div class="nav">
 
         <a href="/">
+            <span class="nav-icon">⌂</span>
             Dashboard
         </a>
 
-        <a href="/history"
-           class="active">
+        <a href="/history" class="active">
+            <span class="nav-icon">▣</span>
             Assessment History
         </a>
 
         <a href="/sensor-monitor">
+            <span class="nav-icon">◉</span>
             Sensor Monitor
         </a>
 
         <a href="/ai-analysis">
+            <span class="nav-icon">✦</span>
             AI Analysis
         </a>
 
     </div>
 
-</div>
+    <div class="sidebar-bottom">
 
+        <strong>● System Online</strong>
+
+        OrthoSense AI v1.0
+
+    </div>
+
+</div>
 
 
 <!-- MAIN -->
@@ -284,21 +475,90 @@
 <div class="main">
 
 
+    <!-- HEADER -->
+
     <div class="header">
 
-        <h1>
-            Assessment History
-        </h1>
+        <div>
 
-        <p>
-            View and analyze previous patient movement assessments.
-        </p>
+            <h1>
+                Assessment History
+            </h1>
+
+            <p>
+                Review previous patient movement assessments.
+            </p>
+
+        </div>
+
+        <div class="system-status">
+            ● System Online
+        </div>
 
     </div>
 
 
+    <!-- SUMMARY -->
+
+    <div class="summary">
+
+        <div class="summary-card">
+
+            <small>
+                Assessment Records
+            </small>
+
+            <h2>
+                {{ records|length }}
+            </h2>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <small>
+                Patient Tracking
+            </small>
+
+            <h2>
+                Active
+            </h2>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <small>
+                AI Analysis
+            </small>
+
+            <h2>
+                Available
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <!-- HISTORY CARD -->
 
     <div class="card">
+
+
+        <div class="card-header">
+
+            <h2>
+                Patient Assessment Records
+            </h2>
+
+            <span>
+                Latest assessments first
+            </span>
+
+        </div>
 
 
         <!-- PATIENT SEARCH -->
@@ -308,14 +568,14 @@
             <input
                 type="text"
                 id="patientInput"
-                placeholder="Enter Patient ID e.g. P001">
+                placeholder="Enter Patient ID e.g. P001"
+                onkeydown="handleEnter(event)">
 
             <button onclick="viewPatient()">
                 View Patient
             </button>
 
         </div>
-
 
 
         <!-- TABLE -->
@@ -366,13 +626,15 @@
                     <tr>
 
                         <td>
-                            {{ record['id'] }}
+                            #{{ record['id'] }}
                         </td>
 
                         <td>
-                            <strong>
+
+                            <span class="patient-id">
                                 {{ record['patient_id'] }}
-                            </strong>
+                            </span>
+
                         </td>
 
                         <td>
@@ -414,11 +676,15 @@
                         </td>
 
                         <td>
-                            {{ record['risk_score'] }}%
+                            <strong>
+                                {{ record['risk_score'] }}%
+                            </strong>
                         </td>
 
                         <td>
-                            {{ record['movement_quality'] }}
+                            <strong>
+                                {{ record['movement_quality'] }}
+                            </strong>
                         </td>
 
                         <td>
@@ -451,18 +717,22 @@
 
         <div class="empty">
 
+            <div class="empty-icon">
+                ▣
+            </div>
+
             <h3>
-                No assessment records found
+                No Assessment Records Found
             </h3>
 
             <p>
-                Complete an AI assessment to create patient records.
+                Complete an AI assessment from the dashboard
+                to create patient records.
             </p>
 
         </div>
 
         {% endif %}
-
 
 
         <a
@@ -476,28 +746,46 @@
 
     </div>
 
-</div>
 
+</div>
 
 
 <script>
 
+
 function viewPatient() {
 
     const patientId =
-        document.getElementById("patientInput").value.trim();
+        document.getElementById(
+            "patientInput"
+        ).value.trim();
+
 
     if (patientId === "") {
 
-        alert("Please enter a Patient ID.");
+        alert(
+            "Please enter a Patient ID."
+        );
 
         return;
 
     }
 
+
     window.location.href =
         "/patient/" +
         encodeURIComponent(patientId);
+
+}
+
+
+function handleEnter(event) {
+
+    if (event.key === "Enter") {
+
+        viewPatient();
+
+    }
 
 }
 
@@ -507,3 +795,4 @@ function viewPatient() {
 </body>
 
 </html>
+```

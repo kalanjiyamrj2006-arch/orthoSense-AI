@@ -4,9 +4,7 @@
 <head>
 
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>OrthoSense AI - Dashboard</title>
 
@@ -20,198 +18,420 @@
         }
 
         body {
-            background: #f4f7fb;
-            color: #1f2937;
+            background: #f1f5f9;
+            color: #1e293b;
         }
 
-        /* SIDEBAR */
+        /* ================= SIDEBAR ================= */
 
         .sidebar {
             position: fixed;
             left: 0;
             top: 0;
-            width: 240px;
+            width: 245px;
             height: 100vh;
-            background: #111827;
-            padding: 25px 15px;
+            background: #0f172a;
+            padding: 28px 16px;
+            z-index: 100;
         }
 
         .logo {
-            color: white;
-            font-size: 22px;
-            font-weight: bold;
             text-align: center;
-            margin-bottom: 35px;
+            color: white;
+            font-size: 23px;
+            font-weight: bold;
+            margin-bottom: 7px;
         }
 
         .logo span {
             color: #38bdf8;
         }
 
+        .sidebar-subtitle {
+            text-align: center;
+            color: #64748b;
+            font-size: 11px;
+            margin-bottom: 35px;
+            letter-spacing: .4px;
+        }
+
         .nav a {
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 12px;
             text-decoration: none;
             color: #cbd5e1;
-            padding: 14px 18px;
-            margin-bottom: 8px;
-            border-radius: 8px;
+            padding: 13px 15px;
+            margin-bottom: 7px;
+            border-radius: 10px;
+            transition: .2s;
+            font-size: 14px;
         }
 
         .nav a:hover {
             background: #1e293b;
             color: white;
+            transform: translateX(2px);
         }
 
         .nav a.active {
             background: #2563eb;
             color: white;
+            box-shadow: 0 5px 15px rgba(37,99,235,.25);
         }
 
-        /* MAIN */
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+            font-size: 17px;
+        }
+
+        .sidebar-bottom {
+            position: absolute;
+            bottom: 24px;
+            left: 20px;
+            right: 20px;
+            padding: 14px;
+            background: #1e293b;
+            border-radius: 10px;
+            color: #94a3b8;
+            font-size: 11px;
+            text-align: center;
+        }
+
+        .sidebar-bottom strong {
+            display: block;
+            color: #4ade80;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+
+        /* ================= MAIN ================= */
 
         .main {
-            margin-left: 240px;
-            padding: 35px;
+            margin-left: 245px;
+            padding: 30px;
+            min-height: 100vh;
         }
 
+        /* ================= HEADER ================= */
+
         .header {
-            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
         }
 
         .header h1 {
-            font-size: 30px;
-            margin-bottom: 8px;
+            color: #0f172a;
+            font-size: 29px;
+            margin-bottom: 6px;
         }
 
         .header p {
             color: #64748b;
+            font-size: 14px;
         }
 
-        /* HERO */
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #ecfdf5;
+            border: 1px solid #bbf7d0;
+            color: #15803d;
+            padding: 9px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(34,197,94,.12);
+        }
+
+        /* ================= HERO ================= */
 
         .hero {
-            background: linear-gradient(
-                135deg,
-                #2563eb,
-                #0ea5e9
-            );
-
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #172554, #2563eb 55%, #0284c7);
             color: white;
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 25px;
+            border-radius: 19px;
+            padding: 31px;
+            margin-bottom: 24px;
+            box-shadow: 0 12px 30px rgba(37,99,235,.16);
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            right: -70px;
+            top: -100px;
+            border: 35px solid rgba(255,255,255,.06);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: "AI";
+            position: absolute;
+            right: 55px;
+            bottom: -25px;
+            font-size: 120px;
+            font-weight: bold;
+            color: white;
+            opacity: .06;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
 
         .hero h2 {
-            font-size: 28px;
-            margin-bottom: 10px;
+            font-size: 27px;
+            margin-bottom: 9px;
         }
 
         .hero p {
-            opacity: 0.9;
+            max-width: 690px;
+            color: #dbeafe;
+            font-size: 14px;
+            line-height: 1.7;
         }
 
-        /* STATISTICS */
+        .hero-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 17px;
+        }
+
+        .hero-tag {
+            background: rgba(255,255,255,.12);
+            border: 1px solid rgba(255,255,255,.12);
+            padding: 7px 11px;
+            border-radius: 20px;
+            font-size: 11px;
+            color: #e0f2fe;
+        }
+
+        /* ================= STATISTICS ================= */
 
         .stats {
             display: grid;
-            grid-template-columns:
-                repeat(4, 1fr);
-
-            gap: 18px;
-            margin-bottom: 25px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
         }
 
         .stat {
             background: white;
-            padding: 22px;
-            border-radius: 14px;
-            box-shadow:
-                0 5px 20px rgba(0,0,0,0.06);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 5px 18px rgba(15,23,42,.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat::after {
+            content: "";
+            position: absolute;
+            right: -15px;
+            bottom: -25px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #eff6ff;
         }
 
         .stat small {
+            position: relative;
+            z-index: 2;
             color: #64748b;
+            font-size: 12px;
         }
 
         .stat h2 {
-            margin-top: 10px;
+            position: relative;
+            z-index: 2;
+            margin-top: 8px;
+            color: #0f172a;
             font-size: 28px;
         }
 
-        /* GRID */
+        .stat-label {
+            margin-top: 4px;
+            font-size: 10px;
+            color: #94a3b8;
+        }
+
+        .stat.blue {
+            border-top: 3px solid #2563eb;
+        }
+
+        .stat.green {
+            border-top: 3px solid #16a34a;
+        }
+
+        .stat.red {
+            border-top: 3px solid #dc2626;
+        }
+
+        .stat.purple {
+            border-top: 3px solid #7c3aed;
+        }
+
+        /* ================= MAIN GRID ================= */
 
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 25px;
+            gap: 24px;
         }
-
-        /* CARD */
 
         .card {
             background: white;
-            padding: 25px;
-            border-radius: 14px;
-            box-shadow:
-                0 5px 20px rgba(0,0,0,0.06);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 5px 20px rgba(15,23,42,.05);
         }
 
-        .card h2 {
-            margin-bottom: 20px;
+        .card-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 21px;
         }
 
-        /* FORM */
+        .card-title h2 {
+            color: #0f172a;
+            font-size: 19px;
+        }
+
+        .card-title span {
+            color: #64748b;
+            font-size: 11px;
+            background: #f8fafc;
+            padding: 6px 9px;
+            border-radius: 20px;
+        }
+
+        /* ================= FORM ================= */
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 14px;
         }
 
         .form-group label {
             display: block;
+            color: #334155;
+            font-size: 12px;
             font-weight: bold;
-            font-size: 14px;
             margin-bottom: 6px;
         }
 
         .form-group input {
             width: 100%;
-            padding: 11px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
+            padding: 11px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+            outline: none;
+            font-size: 13px;
+            transition: .2s;
+        }
+
+        .form-group input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37,99,235,.1);
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
         }
 
         .analyze-btn {
             width: 100%;
-            padding: 13px;
+            padding: 14px;
+            margin-top: 4px;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             background: #2563eb;
             color: white;
+            font-size: 14px;
             font-weight: bold;
             cursor: pointer;
+            transition: .2s;
         }
 
         .analyze-btn:hover {
             background: #1d4ed8;
+            transform: translateY(-1px);
+            box-shadow: 0 7px 18px rgba(37,99,235,.2);
         }
 
-        /* RESULT */
+        .analyze-btn.loading {
+            background: #64748b;
+            cursor: wait;
+        }
+
+        /* ================= RESULT ================= */
 
         .result {
             display: none;
         }
 
+        .empty-result {
+            text-align: center;
+            padding: 50px 20px;
+            color: #64748b;
+        }
+
+        .empty-icon {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: 27px;
+        }
+
+        .empty-result h3 {
+            color: #334155;
+            font-size: 17px;
+        }
+
+        .empty-result p {
+            margin-top: 8px;
+            font-size: 12px;
+        }
+
         .risk-box {
             text-align: center;
-            padding: 25px;
+            padding: 21px;
             background: #f8fafc;
-            border-radius: 12px;
-            margin-bottom: 18px;
+            border-radius: 13px;
+            margin-bottom: 17px;
         }
 
         .risk-box h2 {
-            margin-bottom: 8px;
+            font-size: 22px;
+            margin-bottom: 6px;
         }
 
         .risk-lower {
@@ -223,19 +443,45 @@
         }
 
         .score {
-            font-size: 38px;
+            color: #172554;
+            font-size: 39px;
             font-weight: bold;
         }
 
+        .score-label {
+            color: #64748b;
+            font-size: 11px;
+        }
+
+        .risk-bar {
+            width: 100%;
+            height: 9px;
+            margin-top: 13px;
+            background: #e2e8f0;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        #riskProgress {
+            width: 0%;
+            height: 100%;
+            background: #2563eb;
+            border-radius: 20px;
+            transition: width .7s ease;
+        }
+
+        /* ================= METRICS ================= */
+
         .metrics {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 11px;
         }
 
         .metric {
+            padding: 13px;
             background: #f8fafc;
-            padding: 15px;
+            border: 1px solid #e2e8f0;
             border-radius: 10px;
         }
 
@@ -243,83 +489,197 @@
             display: block;
             color: #64748b;
             margin-bottom: 5px;
+            font-size: 11px;
         }
 
         .metric strong {
-            font-size: 19px;
+            color: #172554;
+            font-size: 18px;
         }
 
-        /* SENSOR */
+        /* ================= SENSOR ================= */
 
-        .sensor-status {
+        .sensor-card {
+            margin-top: 24px;
+        }
+
+        .sensor-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
         }
 
-        .online {
+        .sensor-header h2 {
+            color: #0f172a;
+            font-size: 19px;
+        }
+
+        .sensor-header p {
+            color: #64748b;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        .sensor-connection {
+            display: flex;
+            align-items: center;
+            gap: 7px;
             color: #16a34a;
+            font-size: 12px;
             font-weight: bold;
+        }
+
+        .connection-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
         }
 
         .sensor-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 13px;
         }
 
         .sensor-item {
+            padding: 17px;
             background: #f8fafc;
-            padding: 15px;
-            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
         }
 
         .sensor-item small {
             color: #64748b;
+            font-size: 11px;
         }
 
         .sensor-item h3 {
+            color: #0f172a;
             margin-top: 6px;
+            font-size: 21px;
         }
+
+        .sensor-live {
+            color: #2563eb !important;
+        }
+
+        .quality-bar {
+            width: 100%;
+            height: 6px;
+            margin-top: 8px;
+            background: #e2e8f0;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        #qualityProgress {
+            width: 0%;
+            height: 100%;
+            background: #16a34a;
+            border-radius: 20px;
+            transition: width .5s;
+        }
+
+        /* ================= NOTICE ================= */
 
         .notice {
-            margin-top: 25px;
+            margin-top: 24px;
+            padding: 14px 16px;
             background: #fff7ed;
             border-left: 4px solid #f97316;
-            padding: 15px;
             border-radius: 8px;
             color: #7c2d12;
-            font-size: 13px;
+            font-size: 11px;
+            line-height: 1.6;
         }
 
-        /* RESPONSIVE */
+        /* ================= RESPONSIVE ================= */
 
-        @media (max-width: 1000px) {
+        @media (max-width: 1100px) {
 
             .stats {
                 grid-template-columns: 1fr 1fr;
+            }
+
+            .sensor-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+        @media (max-width: 850px) {
+
+            .sidebar {
+                width: 200px;
+            }
+
+            .main {
+                margin-left: 200px;
+                padding: 20px;
             }
 
             .grid {
                 grid-template-columns: 1fr;
             }
 
+            .header {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 12px;
+            }
+
         }
 
-        @media (max-width: 700px) {
+        @media (max-width: 600px) {
 
             .sidebar {
-                width: 190px;
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 18px;
+            }
+
+            .sidebar-bottom {
+                display: none;
+            }
+
+            .nav {
+                display: flex;
+                overflow-x: auto;
+                gap: 5px;
+            }
+
+            .nav a {
+                white-space: nowrap;
+                margin-bottom: 0;
             }
 
             .main {
-                margin-left: 190px;
-                padding: 20px;
+                margin-left: 0;
+                padding: 15px;
             }
 
             .stats {
                 grid-template-columns: 1fr;
+            }
+
+            .sensor-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .input-grid,
+            .metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 24px;
+            }
+
+            .hero h2 {
+                font-size: 22px;
             }
 
         }
@@ -332,7 +692,7 @@
 <body>
 
 
-<!-- SIDEBAR -->
+<!-- ================= SIDEBAR ================= -->
 
 <div class="sidebar">
 
@@ -340,68 +700,128 @@
         Ortho<span>Sense</span> AI
     </div>
 
+    <div class="sidebar-subtitle">
+        AI Healthcare Platform
+    </div>
+
+
     <div class="nav">
 
         <a href="/" class="active">
-            Dashboard
+            <span class="nav-icon">⌂</span>
+            <span>Dashboard</span>
         </a>
 
         <a href="/history">
-            Assessment History
+            <span class="nav-icon">▣</span>
+            <span>Assessment History</span>
         </a>
 
         <a href="/sensor-monitor">
-            Sensor Monitor
+            <span class="nav-icon">◉</span>
+            <span>Sensor Monitor</span>
         </a>
 
         <a href="/ai-analysis">
-            AI Analysis
+            <span class="nav-icon">✦</span>
+            <span>AI Analysis</span>
         </a>
+
+    </div>
+
+
+    <div class="sidebar-bottom">
+
+        <strong>● System Online</strong>
+
+        OrthoSense AI v1.0
 
     </div>
 
 </div>
 
 
-<!-- MAIN -->
+<!-- ================= MAIN ================= -->
 
 <div class="main">
 
 
+    <!-- HEADER -->
+
     <div class="header">
 
-        <h1>
-            OrthoSense AI Dashboard
-        </h1>
+        <div>
 
-        <p>
-            AI-powered orthopedic movement assessment platform.
-        </p>
+            <h1>
+                OrthoSense AI Dashboard
+            </h1>
+
+            <p>
+                AI-powered orthopedic movement assessment platform.
+            </p>
+
+        </div>
+
+
+        <div class="system-status">
+
+            <span class="status-dot"></span>
+
+            System Online
+
+        </div>
 
     </div>
 
 
-    <!-- HERO -->
+    <!-- ================= HERO ================= -->
 
     <div class="hero">
 
-        <h2>
-            Intelligent Movement Assessment
-        </h2>
+        <div class="hero-content">
 
-        <p>
-            Monitor gait parameters, analyze movement quality,
-            and identify potential movement risks using AI.
-        </p>
+            <h2>
+                Intelligent Movement Assessment
+            </h2>
+
+            <p>
+                Monitor gait parameters, analyze movement quality,
+                and generate AI-assisted movement risk estimates
+                using sensor-based assessment data.
+            </p>
+
+
+            <div class="hero-tags">
+
+                <span class="hero-tag">
+                    ✦ AI-assisted
+                </span>
+
+                <span class="hero-tag">
+                    ◉ Sensor-ready
+                </span>
+
+                <span class="hero-tag">
+                    ✓ Real-time monitoring
+                </span>
+
+                <span class="hero-tag">
+                    ⚡ Research-focused
+                </span>
+
+            </div>
+
+        </div>
 
     </div>
 
 
-    <!-- STATISTICS -->
+    <!-- ================= STATISTICS ================= -->
 
     <div class="stats">
 
-        <div class="stat">
+
+        <div class="stat blue">
 
             <small>
                 Total Assessments
@@ -411,10 +831,14 @@
                 0
             </h2>
 
+            <div class="stat-label">
+                Recorded evaluations
+            </div>
+
         </div>
 
 
-        <div class="stat">
+        <div class="stat green">
 
             <small>
                 Lower Risk
@@ -424,10 +848,14 @@
                 0
             </h2>
 
+            <div class="stat-label">
+                Lower-risk assessments
+            </div>
+
         </div>
 
 
-        <div class="stat">
+        <div class="stat red">
 
             <small>
                 Higher Risk
@@ -437,25 +865,34 @@
                 0
             </h2>
 
+            <div class="stat-label">
+                Higher-risk assessments
+            </div>
+
         </div>
 
 
-        <div class="stat">
+        <div class="stat purple">
 
             <small>
-                Average Movement Quality
+                Avg. Movement Quality
             </small>
 
             <h2 id="averageQuality">
                 0
             </h2>
 
+            <div class="stat-label">
+                Overall quality indicator
+            </div>
+
         </div>
+
 
     </div>
 
 
-    <!-- MAIN GRID -->
+    <!-- ================= MAIN GRID ================= -->
 
     <div class="grid">
 
@@ -464,9 +901,17 @@
 
         <div class="card">
 
-            <h2>
-                Quick Patient Assessment
-            </h2>
+            <div class="card-title">
+
+                <h2>
+                    Quick Patient Assessment
+                </h2>
+
+                <span>
+                    AI Analysis
+                </span>
+
+            </div>
 
 
             <div class="form-group">
@@ -492,72 +937,85 @@
                 <input
                     type="number"
                     id="age"
+                    min="1"
+                    max="120"
                     placeholder="Enter age">
 
             </div>
 
 
-            <div class="form-group">
-
-                <label>
-                    Step Count
-                </label>
-
-                <input
-                    type="number"
-                    id="step_count"
-                    placeholder="Example: 100">
-
-            </div>
+            <div class="input-grid">
 
 
-            <div class="form-group">
+                <div class="form-group">
 
-                <label>
-                    Cadence
-                </label>
+                    <label>
+                        Step Count
+                    </label>
 
-                <input
-                    type="number"
-                    id="cadence"
-                    placeholder="Example: 75">
+                    <input
+                        type="number"
+                        id="step_count"
+                        min="0"
+                        placeholder="Example: 100">
 
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Balance
-                </label>
-
-                <input
-                    type="number"
-                    id="balance"
-                    placeholder="Example: 85">
-
-            </div>
+                </div>
 
 
-            <div class="form-group">
+                <div class="form-group">
 
-                <label>
-                    Symmetry
-                </label>
+                    <label>
+                        Cadence
+                    </label>
 
-                <input
-                    type="number"
-                    id="symmetry"
-                    placeholder="Example: 90">
+                    <input
+                        type="number"
+                        id="cadence"
+                        min="0"
+                        placeholder="Example: 75">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Balance
+                    </label>
+
+                    <input
+                        type="number"
+                        id="balance"
+                        min="0"
+                        placeholder="Example: 85">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Symmetry
+                    </label>
+
+                    <input
+                        type="number"
+                        id="symmetry"
+                        min="0"
+                        placeholder="Example: 90">
+
+                </div>
+
 
             </div>
 
 
             <button
                 class="analyze-btn"
+                id="analyzeButton"
                 onclick="runAssessment()">
 
-                Analyze Movement
+                ✦ Analyze Movement
 
             </button>
 
@@ -568,24 +1026,32 @@
 
         <div class="card">
 
-            <h2>
-                Latest AI Result
-            </h2>
+            <div class="card-title">
+
+                <h2>
+                    Latest AI Result
+                </h2>
+
+                <span>
+                    AI-assisted screening
+                </span>
+
+            </div>
 
 
             <div
                 id="emptyResult"
-                style="
-                    text-align:center;
-                    padding:60px 20px;
-                    color:#64748b;
-                ">
+                class="empty-result">
+
+                <div class="empty-icon">
+                    ✦
+                </div>
 
                 <h3>
                     No Assessment Yet
                 </h3>
 
-                <p style="margin-top:10px;">
+                <p>
                     Enter patient data and run an assessment.
                 </p>
 
@@ -611,14 +1077,22 @@
 
                     </div>
 
-                    <small>
+                    <div class="score-label">
                         AI Risk Score
-                    </small>
+                    </div>
+
+
+                    <div class="risk-bar">
+
+                        <div id="riskProgress"></div>
+
+                    </div>
 
                 </div>
 
 
                 <div class="metrics">
+
 
                     <div class="metric">
 
@@ -684,8 +1158,8 @@
 
                     </div>
 
-                </div>
 
+                </div>
 
             </div>
 
@@ -695,30 +1169,41 @@
     </div>
 
 
-    <!-- LIVE SENSOR -->
+    <!-- ================= SENSOR MONITOR ================= -->
 
-    <div
-        class="card"
-        style="margin-top:25px;">
+    <div class="card sensor-card">
 
-        <div class="sensor-status">
 
-            <h2>
-                Live Sensor Monitoring
-            </h2>
+        <div class="sensor-header">
 
-            <span
-                class="online"
+            <div>
+
+                <h2>
+                    Live Sensor Monitoring
+                </h2>
+
+                <p>
+                    Real-time movement data • Updates every 2 seconds
+                </p>
+
+            </div>
+
+
+            <div
+                class="sensor-connection"
                 id="connectionStatus">
 
-                ● Waiting
+                <span class="connection-dot"></span>
 
-            </span>
+                Connected
+
+            </div>
 
         </div>
 
 
         <div class="sensor-grid">
+
 
             <div class="sensor-item">
 
@@ -726,8 +1211,12 @@
                     Step Count
                 </small>
 
-                <h3 id="sensorSteps">
+                <h3
+                    class="sensor-live"
+                    id="sensorSteps">
+
                     0
+
                 </h3>
 
             </div>
@@ -795,22 +1284,29 @@
                     0
                 </h3>
 
+                <div class="quality-bar">
+
+                    <div id="qualityProgress"></div>
+
+                </div>
+
             </div>
+
 
         </div>
 
     </div>
 
 
-    <!-- NOTICE -->
+    <!-- ================= NOTICE ================= -->
 
     <div class="notice">
 
         <strong>Clinical Notice:</strong>
 
-        OrthoSense AI is designed to support movement
-        assessment and research. AI predictions should
-        not replace professional medical diagnosis.
+        OrthoSense AI is designed to support movement assessment
+        and research. AI-generated predictions should not replace
+        evaluation or diagnosis by a qualified healthcare professional.
 
     </div>
 
@@ -818,8 +1314,8 @@
 </div>
 
 
-
 <script>
+
 
 /* =====================================================
    LOAD STATISTICS
@@ -832,6 +1328,16 @@ async function loadStatistics() {
         const response =
             await fetch("/statistics");
 
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Statistics request failed"
+            );
+
+        }
+
+
         const data =
             await response.json();
 
@@ -839,25 +1345,25 @@ async function loadStatistics() {
         document.getElementById(
             "totalAssessments"
         ).innerText =
-            data.total_assessments;
+            data.total_assessments ?? 0;
 
 
         document.getElementById(
             "lowerRisk"
         ).innerText =
-            data.lower_risk;
+            data.lower_risk ?? 0;
 
 
         document.getElementById(
             "higherRisk"
         ).innerText =
-            data.higher_risk;
+            data.higher_risk ?? 0;
 
 
         document.getElementById(
             "averageQuality"
         ).innerText =
-            data.average_quality;
+            data.average_quality ?? 0;
 
     }
 
@@ -874,7 +1380,7 @@ async function loadStatistics() {
 
 
 /* =====================================================
-   RUN MANUAL ASSESSMENT
+   RUN ASSESSMENT
 ===================================================== */
 
 async function runAssessment() {
@@ -884,25 +1390,30 @@ async function runAssessment() {
             "patient_id"
         ).value.trim();
 
+
     const age =
         document.getElementById(
             "age"
         ).value;
+
 
     const stepCount =
         document.getElementById(
             "step_count"
         ).value;
 
+
     const cadence =
         document.getElementById(
             "cadence"
         ).value;
 
+
     const balance =
         document.getElementById(
             "balance"
         ).value;
+
 
     const symmetry =
         document.getElementById(
@@ -926,6 +1437,20 @@ async function runAssessment() {
         return;
 
     }
+
+
+    const button =
+        document.getElementById(
+            "analyzeButton"
+        );
+
+
+    button.disabled = true;
+
+    button.classList.add("loading");
+
+    button.innerText =
+        "Analyzing Movement...";
 
 
     try {
@@ -968,18 +1493,29 @@ async function runAssessment() {
             );
 
 
+        if (!response.ok) {
+
+            throw new Error(
+                "Prediction request failed"
+            );
+
+        }
+
+
         const data =
             await response.json();
 
 
         document.getElementById(
             "emptyResult"
-        ).style.display = "none";
+        ).style.display =
+            "none";
 
 
         document.getElementById(
             "result"
-        ).style.display = "block";
+        ).style.display =
+            "block";
 
 
         const riskElement =
@@ -999,7 +1535,9 @@ async function runAssessment() {
             riskElement.className =
                 "risk-higher";
 
-        } else {
+        }
+
+        else {
 
             riskElement.className =
                 "risk-lower";
@@ -1007,10 +1545,23 @@ async function runAssessment() {
         }
 
 
+        const riskScore =
+            Number(data.risk_score) || 0;
+
+
         document.getElementById(
             "riskScore"
         ).innerText =
-            data.risk_score + "%";
+            riskScore + "%";
+
+
+        document.getElementById(
+            "riskProgress"
+        ).style.width =
+            Math.min(
+                Math.max(riskScore, 0),
+                100
+            ) + "%";
 
 
         document.getElementById(
@@ -1043,8 +1594,6 @@ async function runAssessment() {
             data.movement_quality;
 
 
-        /* Refresh statistics */
-
         loadStatistics();
 
     }
@@ -1056,6 +1605,19 @@ async function runAssessment() {
         alert(
             "Unable to connect to Flask server."
         );
+
+    }
+
+    finally {
+
+        button.disabled = false;
+
+        button.classList.remove(
+            "loading"
+        );
+
+        button.innerText =
+            "✦ Analyze Movement";
 
     }
 
@@ -1076,6 +1638,15 @@ async function loadSensorData() {
             );
 
 
+        if (!response.ok) {
+
+            throw new Error(
+                "Sensor request failed"
+            );
+
+        }
+
+
         const data =
             await response.json();
 
@@ -1083,43 +1654,64 @@ async function loadSensorData() {
         document.getElementById(
             "sensorSteps"
         ).innerText =
-            data.step_count;
+            data.step_count ?? 0;
 
 
         document.getElementById(
             "sensorCadence"
         ).innerText =
-            data.cadence;
+            data.cadence ?? 0;
 
 
         document.getElementById(
             "sensorBalance"
         ).innerText =
-            data.balance;
+            data.balance ?? 0;
 
 
         document.getElementById(
             "sensorSymmetry"
         ).innerText =
-            data.symmetry;
+            data.symmetry ?? 0;
 
 
         document.getElementById(
             "sensorRisk"
         ).innerText =
-            data.risk;
+            data.risk ?? "Waiting...";
+
+
+        const quality =
+            Number(
+                data.movement_quality
+            ) || 0;
 
 
         document.getElementById(
             "sensorQuality"
         ).innerText =
-            data.movement_quality;
+            quality;
+
+
+        document.getElementById(
+            "qualityProgress"
+        ).style.width =
+            Math.min(
+                Math.max(quality, 0),
+                100
+            ) + "%";
 
 
         document.getElementById(
             "connectionStatus"
-        ).innerText =
-            "● Connected";
+        ).innerHTML =
+            '<span class="connection-dot"></span> Connected';
+
+
+        document.getElementById(
+            "connectionStatus"
+        ).style.color =
+            "#16a34a";
 
     }
 
@@ -1127,8 +1719,14 @@ async function loadSensorData() {
 
         document.getElementById(
             "connectionStatus"
-        ).innerText =
-            "● Disconnected";
+        ).innerHTML =
+            '<span class="connection-dot" style="background:#dc2626;"></span> Disconnected';
+
+
+        document.getElementById(
+            "connectionStatus"
+        ).style.color =
+            "#dc2626";
 
     }
 
@@ -1136,7 +1734,7 @@ async function loadSensorData() {
 
 
 /* =====================================================
-   START
+   START DASHBOARD
 ===================================================== */
 
 loadStatistics();
@@ -1144,7 +1742,7 @@ loadStatistics();
 loadSensorData();
 
 
-/* Update statistics every 5 seconds */
+/* Statistics update */
 
 setInterval(
     loadStatistics,
@@ -1152,7 +1750,7 @@ setInterval(
 );
 
 
-/* Update sensor every 2 seconds */
+/* Sensor update */
 
 setInterval(
     loadSensorData,
